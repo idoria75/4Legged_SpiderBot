@@ -1,2 +1,3 @@
 # 4Legged_SpiderBot
-Version control of a quadruped bot.
+Version control of a quadruped robot utilizing Inverse Kinematics.
+
