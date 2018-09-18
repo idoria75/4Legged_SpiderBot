@@ -10,8 +10,8 @@ function [ ] = plot_cinematicaDireta( theta1, theta2, theta3 )
     angulo_vertical_punho = -180+angulo_vertical_cotovelo+theta3;
 
     figure; title('Cinematica Inversa'); hold on; grid on;
-    xlim([8 12]);
-    ylim([-1 1]);
+    xlim([0 15]);
+    ylim([0 10]);
     
     ponto0_x = 0;
     ponto0_y = Z_base;
