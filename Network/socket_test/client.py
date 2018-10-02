@@ -2,7 +2,7 @@
 import time
 import socket
 
-HOST = "150.162.209.65"
+HOST = "150.162.209.13"
 PORT = 6412
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
