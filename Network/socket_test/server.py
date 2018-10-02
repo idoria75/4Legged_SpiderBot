@@ -1,9 +1,9 @@
+#!/usr/bin/python2.7
 import socket
-import sys
 import time
 
-HOST = "127.0.0.1"   # Symbolic name meaning all available interfaces
-PORT = 6412 # Arbitrary non-privileged port
+HOST = "150.162.209.65"
+PORT = 6412 
 
 a = 0
 
