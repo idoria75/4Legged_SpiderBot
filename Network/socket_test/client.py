@@ -6,6 +6,7 @@ HOST = "150.162.209.13"
 PORT = 6412
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
+# Needs to bind to listen from ESP
 sock.bind((HOST, PORT))
 sock.settimeout(.5)
 

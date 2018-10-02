@@ -9,6 +9,7 @@ a = 0
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.settimeout(3)
+# Needs to bind to listen from ESP
 s.bind((HOST, PORT))
 
 while(1):
