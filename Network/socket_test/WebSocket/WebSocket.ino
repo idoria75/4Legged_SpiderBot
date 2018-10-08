@@ -37,32 +37,23 @@ void setup() {
 }
  
 void loop() {
-
     // Get data from client, if connected
     WiFiClient client = server.available();
-    
     // If client connected and handshake is successfull
     if (client.connected() && webSocketServer.handshake(client)) {
- 
         String data;      
- 
         while (client.connected()) {
- 
             data = webSocketServer.getData();
- 
             // If data
             if (data.length() > 0) {
                  Serial.println(data);
                  data = "Reply: '"+data+"'";
                  webSocketServer.sendData(data);
             }
- 
             delay(10); // Delay needed for receiving the data correctly
      }
- 
      Serial.println("The client disconnected");
      delay(100);
-    }
- 
+    } 
     delay(100);
 }
