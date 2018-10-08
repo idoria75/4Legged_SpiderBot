@@ -13,7 +13,13 @@ const char * networkPswd = "RedeRoboticaLca2015";
 // either use the ip address of the server or 
 // a network broadcast address
 const char * udpAddress = "150.162.209.13";
-const int udpPort = 6412;
+const int udpPort = 6413;
+
+// Stores incoming messages
+const int BUFFER_LEN = 128;
+char buffer[BUFFER_LEN];
+
+time_t millis_time = 0;
 
 //Are we currently connected?
 boolean connected = false;
@@ -35,11 +41,34 @@ void loop(){
     Serial.println("Trying to send packet");
     //Send a packet
     udp.beginPacket(udpAddress,udpPort);
-    udp.printf("Seconds since boot: %u \n", millis()/1000);
+    millis_time = millis()/1000;
+    udp.printf("Seconds since boot: %u \n", millis_time);
     udp.endPacket();
+
+    int packetSize = udp.parsePacket();
+    if (packetSize) {
+      Serial.print("Received packet of size ");
+      Serial.println(packetSize);
+      //Serial.print("From ");
+      //IPAddress remoteIp = udp.remoteIP();
+      //Serial.print(remoteIp);
+      //Serial.print(", port ");
+      //Serial.println(udp.remotePort());
+
+      // read the packet into packetBufffer
+      int len = udp.read(buffer, 255);
+      if (len > 0) {
+        buffer[len] = 0;
+      }
+      Serial.println("Contents:");
+      Serial.println(buffer);
+
+      //Serial.print("Buffer: "); Serial.println(buffer);
+    }
+
+    //Wait for 1 second
+    delay(1000);
   }
-  //Wait for 1 second
-  delay(1000);
 }
 
 void connectToWiFi(const char * ssid, const char * pwd){
