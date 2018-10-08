@@ -1,16 +1,17 @@
-// Based on: https://techtutorialsx.com/2017/12/30/esp32-arduino-using-the-pthreads-library/
+// Based on provant github
 
-#include <pthread.h>
+#include <Thread.h>
+#include <ThreadController.h>
+
+Thread thread1;
+ThreadController groupOfThreads = ThreadController();
 
 bool led_status = false;
 
-void *blink(void *threadid){
+
+void change_LED_state(){
     led_status = !led_status;
     Serial.println(led_status);
-}
-
-void *printThreadId(void *threadid) {
-   Serial.println((int)threadid);
 }
 
 void setup() {
@@ -19,17 +20,22 @@ void setup() {
 
     pinMode(LED_BUILTIN, OUTPUT);
 
-    pthread_t thread1;
-
-    // pthread_create successfull if return is 0
+    thread1.onRun([]() {
+        change_LED_state();
+    });
     
-    if(pthread_create(&thread1, NULL, blink, NULL)){
-        Serial.println("An error has occurred!");
-    }
+    thread1.setInterval(500);
+
+    groupOfThreads.add(&thread1);
+    //digitalWrite(LED_BUILTIN, led_status);
 }
 
 void loop() {
-    // put your main code here, to run repeatedly:
+
+    groupOfThreads.run();
+    
     digitalWrite(LED_BUILTIN, led_status);
+    
+    yield();
 }
 
