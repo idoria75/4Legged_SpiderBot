@@ -2,7 +2,7 @@ import websocket
 import time
  
 ws = websocket.WebSocket()
-ws.connect("ws://192.168.25.123/")
+ws.connect("ws://192.168.4.1/")
  
 i = 0
 nrOfMessages = 200

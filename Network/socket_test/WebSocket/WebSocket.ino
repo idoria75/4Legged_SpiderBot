@@ -4,22 +4,32 @@
 WiFiServer server(80);
 WebSocketServer webSocketServer;
  
-const char* ssid = "GVT-3B34";
-const char* password = "0038817805";
+const char* ssid = "SPIDERBOT";
+const char* password = "seashell";
+
 void setup() {
  
   Serial.begin(115200);
  
-  WiFi.begin(ssid, password); 
+  //WiFi.begin(ssid, password);
+  
+  Serial.println("Setting AP (Access Point)…");
+
+  WiFi.softAP(ssid);
+//  
+//  while (WiFi.status() != WL_CONNECTED) {
+//    delay(1000);
+//    Serial.println("Connecting to WiFi..");
+//  }
  
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.println("Connecting to WiFi..");
-  }
- 
-  Serial.println("Connected to the WiFi network");
-  Serial.println(WiFi.localIP());
- 
+//  Serial.println("Connected to the WiFi network");
+//  Serial.println(WiFi.localIP());
+//
+  Serial.println("Getting IP");
+  IPAddress IP = WiFi.softAPIP();
+  Serial.print("AP IP address: ");
+  Serial.println(IP);
+  
   server.begin();
   delay(100);
 }
