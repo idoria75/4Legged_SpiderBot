@@ -8,14 +8,14 @@
 import websocket
 import time
 
-time_between_messages = 10
+time_between_messages = .1
 # Define websocket and connect to server
 ws = websocket.WebSocket()
 ws.connect("ws://192.168.4.1/")
- 
+
 i = 0
 nrOfMessages = 200
- 
+
 while i<nrOfMessages:
 	# Send message
     ws.send("Message Number: " + str(i))
@@ -24,5 +24,5 @@ while i<nrOfMessages:
     print(result)
     i=i+1
     time.sleep(time_between_messages)
- 
+
 ws.close()

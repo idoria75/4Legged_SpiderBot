@@ -19,13 +19,49 @@ const char* password = "seashell";
 Thread thread1, thread2, t_websocket;
 ThreadController groupOfThreads = ThreadController();
 
+// Thread1: Blink
 bool led_status1 = false;
 
-// Thread1: Blink
 void change_LED_state1(){
     led_status1 = !led_status1;
-    Serial.println(led_status1);
-    Serial.print("LED:"); Serial.println(LED_BUILTIN);
+    //Serial.println(led_status1);
+    //Serial.print("LED:"); Serial.println(LED_BUILTIN);
+}
+
+// Thread 2: WebSocket.getData()
+WiFiClient client;
+String data;
+bool flag_isConnectedToClient = false;
+bool flag_wasConnectedToClient = false;
+
+void receiveDataFromWS(){
+    Serial.println("receiveDataFromWS");
+    if(!flag_isConnectedToClient){
+        client = server.available();
+        if(client.connected() && webSocketServer.handshake(client)){
+            flag_isConnectedToClient = true;
+        }
+    }
+    if(flag_wasConnectedToClient == false && flag_isConnectedToClient == true){
+        Serial.println("Client connected!");
+    }    
+    if(flag_isConnectedToClient){
+        if(client.connected()){
+            data = webSocketServer.getData();
+            if(data.length() > 0){
+                Serial.println(data);
+                data = "Reply: '"+data+"'";
+                webSocketServer.sendData(data);
+            }           
+        }
+        if(!client.connected()){
+            flag_isConnectedToClient = false;
+        }
+    }
+    if(flag_wasConnectedToClient == true && flag_isConnectedToClient == false){
+        Serial.println("Client disconnected!");
+    }
+    flag_wasConnectedToClient = flag_isConnectedToClient;
 }
 
 void setup() {
@@ -52,7 +88,7 @@ void setup() {
     thread1.setInterval(500);
 
     t_websocket.onRun([]() {
-        Serial.println("Hello Thread");
+        receiveDataFromWS();
     });
     t_websocket.setInterval(1000);
 

@@ -45,7 +45,7 @@ void loop() {
     if (client.connected() && webSocketServer.handshake(client)) {
  
         String data;      
- 
+
         while (client.connected()) {
  
             data = webSocketServer.getData();
