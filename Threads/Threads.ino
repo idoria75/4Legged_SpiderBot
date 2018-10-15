@@ -64,6 +64,31 @@ void receiveDataFromWS(){
     flag_wasConnectedToClient = flag_isConnectedToClient;
 }
 
+// FSM (Finite-State Machine)
+// State #0: SetUp
+// State #1: Reset Stance
+// State #2: Initial Robot Configuration
+// State #3: Move B Forward
+// State #4: Move A Forward
+// State #5: Push Forward
+// State #6: Move C Forward
+// State #7: Move D Forward
+// State #8: Push Forward -> Loop back to State #3 
+int state = 0;
+void runStateMachine(){
+    switch (state) {
+        case 0:
+
+            break;
+        case 1:
+            break;
+        case 2: 
+            break;
+        case 3:
+            break;
+    }
+}
+
 void setup() {
     // Pin Setup
     pinMode(LED_BUILTIN, OUTPUT);
