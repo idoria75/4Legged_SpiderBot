@@ -16,10 +16,10 @@ const char* ssid = "SPIDERBOT";
 const char* password = "seashell";
 
 // Defines threads and their controller:
-Thread thread1, thread2, t_websocket;
+Thread thread_blink, thread_fsm, t_websocket;
 ThreadController groupOfThreads = ThreadController();
 
-// Thread1: Blink
+// thread_blink: Blink
 bool led_status1 = false;
 
 void change_LED_state1(){
@@ -75,24 +75,55 @@ void receiveDataFromWS(){
 // State #7: Move D Forward
 // State #8: Push Forward -> Loop back to State #3 
 int state = 0;
-void runStateMachine(){
+int led_4  = 0;
+int led_13 = 0;
+int led_15 = 0;
+int led_26 = 0;
+
+void updateStateMachine(){
     switch (state) {
         case 0:
-
+            led_15 = 0;
+            led_4  = 1;
             break;
         case 1:
+            led_4  = 0;
+            led_26 = 1;
             break;
-        case 2: 
+        case 2:
+            led_26 = 0;
+            led_13 = 1;
             break;
         case 3:
+            led_13 = 0;
+            led_15 = 1;
             break;
     }
+}
+
+void runStateMachine(){
+    updateStateMachine();
+    if(state == 3){
+        state = 0;
+    }
+    else{
+        state = state+1;
+    }
+    digitalWrite( 4, led_4 );
+    digitalWrite(13, led_13);
+    digitalWrite(15, led_15);
+    digitalWrite(26, led_26);
+    //delay(100);
 }
 
 void setup() {
     // Pin Setup
     pinMode(LED_BUILTIN, OUTPUT);
-    pinMode(4, OUTPUT);
+    // Pin Setup for FSM
+    pinMode( 4, OUTPUT);
+    pinMode(13, OUTPUT);
+    pinMode(15, OUTPUT);
+    pinMode(26, OUTPUT);
 
     // Initialize serial port
     Serial.begin(115200);
@@ -107,19 +138,24 @@ void setup() {
     // Start websocket server
     server.begin();
 
-    thread1.onRun([]() {
+    thread_blink.onRun([]() {
         change_LED_state1();
     });
-    thread1.setInterval(500);
+    thread_blink.setInterval(500);
 
     t_websocket.onRun([]() {
         receiveDataFromWS();
     });
     t_websocket.setInterval(1000);
 
+    thread_fsm.onRun([]() {
+        runStateMachine();
+    });
+    thread_fsm.setInterval(500);
 
-    groupOfThreads.add(&thread1);
+    groupOfThreads.add(&thread_blink);
     groupOfThreads.add(&t_websocket);
+    groupOfThreads.add(&thread_fsm);
     //digitalWrite(LED_BUILTIN, led_status);
 }
 
