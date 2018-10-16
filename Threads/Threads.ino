@@ -6,6 +6,7 @@ Developed by Ivan Posca Doria (ivanpdoria@gmail.com)
 #include <WebSocketServer.h>
 #include <Thread.h>
 #include <ThreadController.h>
+#include "Leg.h"
 
 // Initialize WebSocketServer
 WiFiServer server(80);
@@ -24,8 +25,6 @@ bool led_status1 = false;
 
 void change_LED_state1(){
     led_status1 = !led_status1;
-    //Serial.println(led_status1);
-    //Serial.print("LED:"); Serial.println(LED_BUILTIN);
 }
 
 // Thread 2: WebSocket.getData()
@@ -197,6 +196,9 @@ void setup() {
     groupOfThreads.add(&t_websocket);
     groupOfThreads.add(&thread_fsm);
     //digitalWrite(LED_BUILTIN, led_status);
+
+    Leg leg1;
+    Serial.println(leg1.get_shoulder_length);
 }
 
 void loop() {
