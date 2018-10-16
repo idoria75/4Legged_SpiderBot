@@ -29,13 +29,13 @@ int Leg::get_tibia_angle(){
 }
 
 int Leg::get_shoulder_length(){
-    return SHOULDER_LENGTH;
+    return shoulder_length;
 }
 
 int Leg::get_femur_length(){
-    return FEMUR_LENGTH;
+    return femur_length;
 }
 
 int Leg::get_tibia_length(){
-    return TIBIA_LENGTH;
+    return tibia_length;
 }

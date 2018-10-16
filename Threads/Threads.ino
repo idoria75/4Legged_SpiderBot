@@ -198,7 +198,7 @@ void setup() {
     //digitalWrite(LED_BUILTIN, led_status);
 
     Leg leg1;
-    Serial.println(leg1.get_shoulder_length);
+    Serial.print("SHOULDER LENGTH: "); Serial.println(leg1.get_shoulder_length());
 }
 
 void loop() {
