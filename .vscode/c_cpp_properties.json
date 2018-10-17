@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "/home/ivan/.arduino15/packages/esp32/tools/**",
+                "/home/ivan/.arduino15/packages/esp32/hardware/esp32/1.0.0/**",
+                "/opt/arduino-1.8.5/hardware/tools/**",
+                "/opt/arduino-1.8.5/libraries/**",
+                "/home/ivan/Documents/Arduino/hardware/tools/**",
+                "/home/ivan/Documents/Arduino/libraries/**",
+                "/home/Arduino/libraries/**"
+            ],
+            "browse": {
+                "path": [
+                    "/home/Arduino/libraries/ArduinoThread/**"
+                ],
+                "limitSymbolsToIncludedHeaders": false
+            },
+            "forcedInclude": [],
+            "intelliSenseMode": "clang-x64",
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}
