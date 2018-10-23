@@ -1,0 +1,10 @@
+{
+  "builtInLibrariesFolders": "/opt/arduino-1.8.5/libraries",
+  "customBuildProperties": "build.path=/home/ivan/Arduino/generated_examples/servo/build,build.warn_data_percentage=75,runtime.tools.esptool.path=/home/ivan/.arduino15/packages/esp8266/tools/esptool/0.4.13,runtime.tools.xtensa-lx106-elf-gcc.path=/home/ivan/.arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/1.20.0-26-gb404fb9-2,runtime.tools.mkspiffs.path=/home/ivan/.arduino15/packages/esp8266/tools/mkspiffs/0.2.0",
+  "fqbn": "esp8266:esp8266:nodemcuv2:CpuFrequency=160,VTable=flash,FlashSize=4M1M,LwIPVariant=v2mss536,Debug=Disabled,DebugLevel=None____,FlashErase=none,UploadSpeed=921600",
+  "hardwareFolders": "/opt/arduino-1.8.5/hardware,/home/ivan/.arduino15/packages",
+  "otherLibrariesFolders": "/home/ivan/Arduino/libraries",
+  "runtime.ide.version": "10805",
+  "sketchLocation": "/home/ivan/Arduino/generated_examples/servo/servo.ino",
+  "toolsFolders": "/opt/arduino-1.8.5/tools-builder,/opt/arduino-1.8.5/hardware/tools/avr,/home/ivan/.arduino15/packages"
+}
