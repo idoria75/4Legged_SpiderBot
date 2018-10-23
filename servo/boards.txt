@@ -1,0 +1,6 @@
+// ESP-32:
+"board": "esp32:esp32:esp32doit-devkit-v1",
+
+// ATMega:
+"configuration": "cpu=atmega2560",
+"board": "arduino:avr:mega"
