@@ -2,6 +2,6 @@
     "sketch": "servo.ino",
     "output": "../build",
     "port": "/dev/ttyUSB0",
-    "board": "esp32:esp32:esp32doit-devkit-v1",
-    "configuration": "FlashFreq=80,UploadSpeed=921600,DebugLevel=none"
+    "configuration": "FlashFreq=80,UploadSpeed=921600,DebugLevel=none",
+    "board": "esp32:esp32:esp32doit-devkit-v1"
 }
