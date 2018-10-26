@@ -9,14 +9,8 @@
                 "/opt/arduino-1.8.5/libraries/**",
                 "/home/ivan/Documents/Arduino/hardware/tools/**",
                 "/home/ivan/Documents/Arduino/libraries/**",
-                "/home/Arduino/libraries/**"
+                "/home/ivan/Arduino/libraries/**"
             ],
-            "browse": {
-                "path": [
-                    "/home/Arduino/libraries/ArduinoThread/**"
-                ],
-                "limitSymbolsToIncludedHeaders": false
-            },
             "forcedInclude": [],
             "intelliSenseMode": "clang-x64",
             "compilerPath": "/usr/bin/clang",
