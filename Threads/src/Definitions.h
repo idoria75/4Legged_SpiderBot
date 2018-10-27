@@ -5,6 +5,7 @@
 #include <WebSocketServer.h>
 #include <WiFi.h>
 
+#include "FSM.h"
 #include "Robot.h"
 
 // Initialize WebSocketServer
@@ -31,6 +32,8 @@ bool flag_wasConnectedToClient = false;
 void receiveDataFromWS();
 
 void pinConfiguration();
+void boardConfiguration();
 void WiFiConfiguration();
-void boardConfigurations();
 void threadConfiguration();
+
+bool run_setUp();

@@ -4,6 +4,8 @@ void change_LED_state1() {
   led_status1 = !led_status1;
 }
 
+int count_msgs_received = 0;
+
 void receiveDataFromWS() {
   Serial.println("receiveDataFromWS");
   if (!flag_isConnectedToClient) {
@@ -20,7 +22,9 @@ void receiveDataFromWS() {
       data = webSocketServer.getData();
       if (data.length() > 0) {
         Serial.println(data);
-        data = "Reply: '" + data + "'";
+        count_msgs_received++;
+        data = "Reply: '" + data +
+               "'. Msgs recv cnt: " + String(count_msgs_received);
         webSocketServer.sendData(data);
       }
     }
@@ -44,8 +48,44 @@ void pinConfiguration() {
   pinMode(26, OUTPUT);
 }
 
-void WiFiConfiguration() {}
+void WiFiConfiguration() {
+  // Initialize WiFi service as Access Point (AP)
+  Serial.println("Setting up ESP32 as Access Point");
+  WiFi.softAP(ssid);
+  // Get IP address of ESP32 in its own network
+  IPAddress IP = WiFi.softAPIP();
+  Serial.print("AP IP address: ");
+  Serial.println(IP);
+  // Start websocket server
+  server.begin();
+}
 
-void boardConfigurations() {}
+void boardConfiguration() {
+  // Configure pinModes
+  pinConfiguration();
 
-void threadConfiguration() {}
+  // Initialize serial port
+  Serial.begin(115200);
+}
+
+void threadConfiguration() {
+  thread_blink.onRun([]() { change_LED_state1(); });
+  thread_blink.setInterval(100);
+
+  t_websocket.onRun([]() { receiveDataFromWS(); });
+  t_websocket.setInterval(1000);
+
+  thread_fsm.onRun([]() { runStateMachine(); });
+  thread_fsm.setInterval(500);
+
+  groupOfThreads.add(&thread_blink);
+  groupOfThreads.add(&t_websocket);
+  groupOfThreads.add(&thread_fsm);
+}
+
+bool run_setUp() {
+  pinConfiguration();
+  boardConfiguration();
+  WiFiConfiguration();
+  threadConfiguration();
+}
