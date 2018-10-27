@@ -1,5 +1,8 @@
 #include "Definitions.h"
 
+int new_max = map(MAX_ANGLE, 0, 180, SERVOMIN, SERVOMAX);
+int new_min = map(MIN_ANGLE, 0, 180, SERVOMIN, SERVOMAX);
+
 void change_LED_state1() {
   led_status1 = !led_status1;
 }
