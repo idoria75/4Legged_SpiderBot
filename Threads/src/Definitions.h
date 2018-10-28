@@ -4,6 +4,7 @@
 #pragma once
 
 #include <Adafruit_PWMServoDriver.h>
+#include <ArduinoJson.h>
 #include <Thread.h>
 #include <ThreadController.h>
 #include <WebSocketServer.h>

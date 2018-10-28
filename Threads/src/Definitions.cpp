@@ -9,6 +9,8 @@ void change_LED_state1() {
 
 int count_msgs_received = 0;
 
+StaticJsonBuffer<200> jsonBuffer;
+
 void receiveDataFromWS() {
   Serial.println("receiveDataFromWS");
   if (!flag_isConnectedToClient) {
@@ -24,7 +26,14 @@ void receiveDataFromWS() {
     if (client.connected()) {
       data = webSocketServer.getData();
       if (data.length() > 0) {
+        Serial.print("Data: ");
         Serial.println(data);
+        JsonObject& root = jsonBuffer.parseObject(data);
+        int msg_cont = root["MessageNumber"];
+        Serial.print("Root: ");
+        Serial.println(root);
+        Serial.print("Message Number: ");
+        Serial.println(msg_cont);
         count_msgs_received++;
         data = "Reply: '" + data +
                "'. Msgs recv cnt: " + String(count_msgs_received);

@@ -3,6 +3,7 @@
         {
             "name": "Linux",
             "includePath": [
+                "/home/ivan/Arduino/libraries/ArduinoJson/src",
                 "/home/ivan/.arduino15/packages/esp32/tools/**",
                 "/home/ivan/.arduino15/packages/esp32/hardware/esp32/1.0.0/**",
                 "/opt/arduino-1.8.5/hardware/tools/**",
