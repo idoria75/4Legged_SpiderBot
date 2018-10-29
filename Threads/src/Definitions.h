@@ -22,8 +22,9 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 #define MAX_ANGLE 120
 #define MIN_ANGLE 60
 
-// For JSON Buffer
-#define BUFFER_SIZE 512
+// For JSON Buffer (based on https://arduinojson.org/v5/assistant/)
+#define BUFFER_SIZE_RECV 100
+#define BUFFER_SIZE_SEND 512
 
 // Assumindo frente como a "boca"
 // Pernas 1, 2, 3 e 4

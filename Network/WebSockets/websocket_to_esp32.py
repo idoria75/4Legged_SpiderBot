@@ -24,13 +24,18 @@ while i < nrOfMessages:
         "gaitDirection": "forward"
     }
     y = json.dumps(x)
-    print(y)
+    #print("Sent: ")
+    #print(y)
     ws.send(y)
 
     #ws.send("Message Number: " + str(i))
     # Gets reply from server
     result = ws.recv()
-    print(result)
+    result_parsed = json.loads(result)
+    #print("Received: ")
+    #print(result)
+    print("Parsed: ")
+    print(result_parsed)
     i = i+1
     time.sleep(time_between_messages)
 
