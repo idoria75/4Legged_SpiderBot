@@ -7,22 +7,32 @@
 
 import websocket
 import time
+import json
 
-time_between_messages = 10
+time_between_messages = .2
 # Define websocket and connect to server
 ws = websocket.WebSocket()
-ws.connect("ws://192.168.4.1/")
- 
+ws.connect("ws://192.168.25.124/")
+
 i = 0
 nrOfMessages = 200
- 
-while i<nrOfMessages:
-	# Send message
-    ws.send("Message Number: " + str(i))
+
+while i < nrOfMessages:
+    # Send message
+    x = {
+        "MessageNumber": str(i),
+        "Mode": "Auto",
+        "Ref": "Forward"
+    }
+    y = json.dumps(x)
+    print(y)
+    ws.send(y)
+
+    #ws.send("Message Number: " + str(i))
     # Gets reply from server
     result = ws.recv()
     print(result)
-    i=i+1
+    i = i+1
     time.sleep(time_between_messages)
- 
+
 ws.close()

@@ -1,0 +1,10 @@
+{
+  "builtInLibrariesFolders": "/opt/arduino-1.8.5/libraries",
+  "customBuildProperties": "build.path=/home/ivan/Documents/4Legged_SpiderBot/build,build.warn_data_percentage=75,runtime.tools.xtensa-esp32-elf-gcc.path=/home/ivan/.arduino15/packages/esp32/tools/xtensa-esp32-elf-gcc/1.22.0-80-g6c4433a-5.2.0,runtime.tools.mkspiffs.path=/home/ivan/.arduino15/packages/esp32/tools/mkspiffs/0.2.3,runtime.tools.esptool.path=/home/ivan/.arduino15/packages/esp32/tools/esptool/2.3.1",
+  "fqbn": "esp32:esp32:esp32doit-devkit-v1:FlashFreq=80,UploadSpeed=921600,DebugLevel=none",
+  "hardwareFolders": "/opt/arduino-1.8.5/hardware,/home/ivan/.arduino15/packages",
+  "otherLibrariesFolders": "/home/ivan/Arduino/libraries",
+  "runtime.ide.version": "10805",
+  "sketchLocation": "/home/ivan/Documents/4Legged_SpiderBot/Threads/src/Definitions.cpp",
+  "toolsFolders": "/opt/arduino-1.8.5/tools-builder,/opt/arduino-1.8.5/hardware/tools/avr,/home/ivan/.arduino15/packages"
+}
