@@ -20,9 +20,8 @@ nrOfMessages = 200
 while i < nrOfMessages:
     # Send message
     x = {
-        "MessageNumber": str(i),
-        "Mode": "Auto",
-        "Ref": "Forward"
+        "mode": "manual",
+        "gaitDirection": "forward"
     }
     y = json.dumps(x)
     print(y)

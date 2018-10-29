@@ -46,17 +46,16 @@ void receiveDataFromWS() {
           return;
         }
 
-        Serial.print("Message No: ");
-        int msg_no = root["MessageNumber"];
-        // Serial.println(root["MessageNumber"].as<int>());
-        Serial.println(msg_no);
+        // Serial.print("Message No: ");
+        // int msg_no = root["MessageNumber"];
+        // Serial.println(msg_no);
 
         Serial.print("Mode: ");
-        const char* mode = root["Mode"];
+        const char* mode = root["mode"];
         Serial.println(mode);
 
         Serial.print("Ref: ");
-        const char* ref = root["Ref"];
+        const char* ref = root["gaitDirection"];
         Serial.println(ref);
 
         root.prettyPrintTo(Serial);
