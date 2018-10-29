@@ -9,8 +9,6 @@ void change_LED_state1() {
 
 int count_msgs_received = 0;
 
-StaticJsonBuffer<200> jsonBuffer;
-
 void receiveDataFromWS() {
   Serial.println("receiveDataFromWS");
   if (!flag_isConnectedToClient) {
@@ -25,15 +23,48 @@ void receiveDataFromWS() {
   if (flag_isConnectedToClient) {
     if (client.connected()) {
       data = webSocketServer.getData();
+
       if (data.length() > 0) {
-        Serial.print("Data: ");
+        Serial.println("Data: ");
         Serial.println(data);
-        JsonObject& root = jsonBuffer.parseObject(data);
-        int msg_cont = root["MessageNumber"];
-        Serial.print("Root: ");
-        Serial.println(root);
-        Serial.print("Message Number: ");
-        Serial.println(msg_cont);
+
+        // Investigate why this declaration needs to be here for it to work
+        char data_buf[BUFFER_SIZE];
+
+        data.toCharArray(data_buf, BUFFER_SIZE);
+        Serial.println("Data Buf: ");
+        Serial.println(data_buf);
+
+        // Investigate why this declaration needs to be here for it to work
+        StaticJsonBuffer<BUFFER_SIZE> jsonBuffer;
+
+        JsonObject& root = jsonBuffer.parseObject(data_buf);
+
+        if (!root.success()) {
+          Serial.println("parseObject() failed");
+          webSocketServer.sendData("Error!");
+          return;
+        }
+
+        Serial.print("Message No: ");
+        int msg_no = root["MessageNumber"];
+        // Serial.println(root["MessageNumber"].as<int>());
+        Serial.println(msg_no);
+
+        Serial.print("Mode: ");
+        const char* mode = root["Mode"];
+        Serial.println(mode);
+
+        Serial.print("Ref: ");
+        const char* ref = root["Ref"];
+        Serial.println(ref);
+
+        root.prettyPrintTo(Serial);
+        Serial.println("");
+
+        Serial.println("Messages already received: ");
+        Serial.println(count_msgs_received);
+
         count_msgs_received++;
         data = "Reply: '" + data +
                "'. Msgs recv cnt: " + String(count_msgs_received);
@@ -48,6 +79,7 @@ void receiveDataFromWS() {
     Serial.println("Client disconnected!");
   }
   flag_wasConnectedToClient = flag_isConnectedToClient;
+  delay(100);
 }
 
 void pinConfiguration() {
