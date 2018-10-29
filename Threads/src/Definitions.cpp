@@ -9,65 +9,60 @@ void change_LED_state1() {
 
 int count_msgs_received = 0;
 
+// Receive data from WebSocket (WS)
 void receiveDataFromWS() {
-  Serial.println("receiveDataFromWS");
+  // If no client connected to WS
   if (!flag_isConnectedToClient) {
     client = server.available();
+    // If client connects and handshakes
     if (client.connected() && webSocketServer.handshake(client)) {
       flag_isConnectedToClient = true;
     }
   }
+  // If client just connected, print to serial
   if (flag_wasConnectedToClient == false && flag_isConnectedToClient == true) {
     Serial.println("Client connected!");
   }
+  // If flag means client is connected
   if (flag_isConnectedToClient) {
+    // Check if still connected
     if (client.connected()) {
+      // Retrieve data from client
       data = webSocketServer.getData();
-
+      // If there is data
       if (data.length() > 0) {
-        Serial.println("Data: ");
-        Serial.println(data);
-
-        // Investigate why this declaration needs to be here for it to work
+        // Investigate why this needs to be here for it to work
+        // Converts string received to chat array
         char data_buf[BUFFER_SIZE_RECV];
-
         data.toCharArray(data_buf, BUFFER_SIZE_RECV);
-        Serial.println("Data Buf: ");
-        Serial.println(data_buf);
 
         // Investigate why this declaration needs to be here for it to work
         StaticJsonBuffer<BUFFER_SIZE_RECV> jsonBuffer_recv;
         JsonObject& root_recv = jsonBuffer_recv.parseObject(data_buf);
 
+        // If parsing fails
         if (!root_recv.success()) {
           Serial.println("parseObject() failed");
+          // Sends to client "Error" message
           webSocketServer.sendData("Error!");
           return;
         }
 
-        // Serial.print("Message No: ");
-        // int msg_no = root_recv["MessageNumber"];
-        // Serial.println(msg_no);
-
+        // Prints mode received from JSON
         Serial.print("Mode: ");
         const char* mode = root_recv["mode"];
         Serial.println(mode);
 
+        // Prints gaitDirection received from JSON
         Serial.print("Ref: ");
         const char* ref = root_recv["gaitDirection"];
         Serial.println(ref);
 
-        root_recv.prettyPrintTo(Serial);
-        Serial.println("");
-
-        Serial.println("Messages already received: ");
-        Serial.println(count_msgs_received);
-
-        count_msgs_received++;
-
+        // Creates JSON for sending data
         StaticJsonBuffer<BUFFER_SIZE_SEND> jsonBuffer_send;
         JsonObject& root_send = jsonBuffer_send.createObject();
 
+        // Creates nested objects
         JsonArray& sensor_data = root_send.createNestedArray("sensors");
         sensor_data.add(21);
         sensor_data.add(22);
@@ -98,25 +93,29 @@ void receiveDataFromWS() {
         legD_data.add(20);
         legD_data.add(25);
         legD_data.add(30);
-        // data = "Reply: '" + data +
-        //        "'. Msgs recv cnt: " + String(count_msgs_received);
 
-        root_send.prettyPrintTo(Serial);
+        // root_send.prettyPrintTo(Serial);
 
+        // Creates char array to send message to client
         char jsonChar[BUFFER_SIZE_SEND];
+        // Copy JSON to char array
         root_send.printTo((char*)jsonChar, root_send.measureLength() + 1);
+        // Sends JSON to client
         webSocketServer.sendData(jsonChar);
       }
     }
+    // If client is not connected
     if (!client.connected()) {
       flag_isConnectedToClient = false;
     }
   }
+  // If client has just disconnected
   if (flag_wasConnectedToClient == true && flag_isConnectedToClient == false) {
     Serial.println("Client disconnected!");
   }
+  // Updates previous connection status
   flag_wasConnectedToClient = flag_isConnectedToClient;
-  delay(100);
+  delay(10);
 }
 
 void pinConfiguration() {

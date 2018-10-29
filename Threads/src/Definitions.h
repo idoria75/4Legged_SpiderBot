@@ -70,6 +70,7 @@ void change_LED_state1();
 
 // Thread 2: WebSocket.getData()
 WiFiClient client;
+// String to receive data from WS
 String data;
 bool flag_isConnectedToClient = false;
 bool flag_wasConnectedToClient = false;
