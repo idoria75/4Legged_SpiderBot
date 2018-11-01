@@ -64,7 +64,7 @@ void receiveDataFromWS() {
 
         // Creates nested objects
         JsonArray& sensor_data = root_send.createNestedArray("sensors");
-        sensor_data.add(21);
+        sensor_data.add(distance1);
         sensor_data.add(22);
         sensor_data.add(23);
         sensor_data.add(24);
@@ -163,9 +163,36 @@ void threadConfiguration() {
   groupOfThreads.add(&thread_fsm);
 }
 
+void readSensor1() {
+  digitalWrite(trigger1, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(trigger1, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigger1, LOW);
+  duration1 = pulseIn(echo1, HIGH);
+  distance1 = (duration1 / 2) / 29.1;
+
+  Serial.print(distance1);
+  Serial.println(" cm");
+}
+
+void threadConfiguration_sensors() {
+  // For ESP-32
+  // To-Do
+  // For ESP-8266
+  pinMode(echo1, INPUT);
+  pinMode(trigger1, OUTPUT);
+
+  thread_readSensor1.onRun([]() { readSensor1(); });
+  thread_readSensor1.setInterval(500);
+  groupOfThreads.add(&thread_readSensor1);
+}
+
 bool run_setUp() {
   pinConfiguration();
   boardConfiguration();
   WiFiConfiguration();
   threadConfiguration();
+  threadConfiguration_sensors();
 }

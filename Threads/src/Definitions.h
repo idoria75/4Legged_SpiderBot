@@ -61,7 +61,7 @@ const char* ssid = "SPIDERBOT";
 const char* password = "seashell";
 
 // Defines threads and their controller:
-Thread thread_blink, thread_fsm, t_websocket;
+Thread thread_blink, thread_fsm, t_websocket, thread_readSensor1;
 ThreadController groupOfThreads = ThreadController();
 
 // thread_blink: Blink
@@ -80,5 +80,11 @@ void pinConfiguration();
 void boardConfiguration();
 void WiFiConfiguration();
 void threadConfiguration();
+
+long duration1, distance1;
+int echo1 = 4;
+int trigger1 = 5;
+
+void readSensor1();
 
 bool run_setUp();
