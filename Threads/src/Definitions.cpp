@@ -178,9 +178,6 @@ void readSensor1() {
 }
 
 void threadConfiguration_sensors() {
-  // For ESP-32
-  // To-Do
-  // For ESP-8266
   pinMode(echo1, INPUT);
   pinMode(trigger1, OUTPUT);
 
