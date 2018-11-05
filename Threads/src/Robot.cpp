@@ -1,19 +1,54 @@
 #include "Robot.h"
 
-// Robot::Robot(){};
-
-// Robot::Robot(Leg leg1, Leg leg2, Leg leg3, Leg leg4) {
-//   legA = leg1;
-//   legB = leg2;
-//   legC = leg3;
-//   legD = leg4;
-// }
-
-void Robot::update_leg(Leg leg,
+void Robot::update_leg(int leg_id,
                        int new_shoulder_angle,
                        int new_femur_angle,
                        int new_tibia_angle) {
-  leg.update_shoulder_angle(new_shoulder_angle);
-  leg.update_femur_angle(new_femur_angle);
-  leg.update_tibia_angle(new_tibia_angle);
+  if (leg_id == 1) {
+    legA.update_leg_members(new_shoulder_angle, new_femur_angle,
+                            new_tibia_angle);
+  }
+  if (leg_id == 2) {
+    legB.update_leg_members(new_shoulder_angle, new_femur_angle,
+                            new_tibia_angle);
+  }
+  if (leg_id == 3) {
+    legC.update_leg_members(new_shoulder_angle, new_femur_angle,
+                            new_tibia_angle);
+  }
+  if (leg_id == 4) {
+    legD.update_leg_members(new_shoulder_angle, new_femur_angle,
+                            new_tibia_angle);
+  }
+}
+
+void Robot::print_leg_status() {
+  Serial.println("Leg A:");
+  Serial.println(legA.get_shoulder_length());
+  Serial.println(legA.get_femur_length());
+  Serial.println(legA.get_tibia_length());
+  Serial.println(legA.get_shoulder_angle());
+  Serial.println(legA.get_femur_angle());
+  Serial.println(legA.get_tibia_angle());
+  Serial.println("Leg B:");
+  Serial.println(legB.get_shoulder_length());
+  Serial.println(legB.get_femur_length());
+  Serial.println(legB.get_tibia_length());
+  Serial.println(legB.get_shoulder_angle());
+  Serial.println(legB.get_femur_angle());
+  Serial.println(legB.get_tibia_angle());
+  Serial.println("Leg C:");
+  Serial.println(legC.get_shoulder_length());
+  Serial.println(legC.get_femur_length());
+  Serial.println(legC.get_tibia_length());
+  Serial.println(legC.get_shoulder_angle());
+  Serial.println(legC.get_femur_angle());
+  Serial.println(legC.get_tibia_angle());
+  Serial.println("Leg D:");
+  Serial.println(legD.get_shoulder_length());
+  Serial.println(legD.get_femur_length());
+  Serial.println(legD.get_tibia_length());
+  Serial.println(legD.get_shoulder_angle());
+  Serial.println(legD.get_femur_angle());
+  Serial.println(legD.get_tibia_angle());
 }

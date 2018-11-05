@@ -1,34 +1,38 @@
 #pragma once
 #include <Arduino.h>
-
-#define INITIAL_SHOULDER_ANGLE 0;
-#define INITIAL_FEMUR_ANGLE 0;
-#define INITIAL_TIBIA_ANGLE 0;
-
-// #define SHOULDER_LENGTH 5;
-// #define FEMUR_LENGTH    5;
-// #define TIBIA_LENGTH    4;
-
 class Leg {
  public:
-  Leg();
-  void update_shoulder_angle(int new_shoulder_angle);
-  void update_femur_angle(int new_femur_angle);
-  void update_tibia_angle(int new_tibia_angle);
+  Leg(int shoulder_len,
+      int femur_len,
+      int tibia_len,
+      int shoulder_ang,
+      int femur_ang,
+      int tibia_ang)
+      : shoulder_length(shoulder_len),
+        femur_length(femur_len),
+        tibia_length(tibia_len),
+        shoulder_angle(shoulder_ang),
+        femur_angle(femur_ang),
+        tibia_angle(tibia_ang){};
+
   int get_shoulder_angle();
   int get_femur_angle();
   int get_tibia_angle();
   int get_shoulder_length();
   int get_femur_length();
   int get_tibia_length();
+  void update_leg_members(int new_shoulder_angle,
+                          int new_femur_angle,
+                          int new_tibia_angle);
 
  private:
-  const int shoulder_length = 5;
-  const int femur_length = 5;
-  const int tibia_length = 3;
+  int shoulder_length;
+  int femur_length;
+  int tibia_length;
   int shoulder_angle;
   int femur_angle;
   int tibia_angle;
-
-  // Leg();
+  void update_shoulder_angle(int new_shoulder_angle);
+  void update_femur_angle(int new_femur_angle);
+  void update_tibia_angle(int new_tibia_angle);
 };
