@@ -26,32 +26,6 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 #define BUFFER_SIZE_RECV 100
 #define BUFFER_SIZE_SEND 512
 
-// Assumindo frente como a "boca"
-// Pernas 1, 2, 3 e 4
-// 1 2
-//  x
-// 3 4
-
-// Perna 1:
-// pwm.setPWM(0, 0, 400);
-// pwm.setPWM(1, 0, 420);
-// pwm.setPWM(11, 0, 400);
-
-// Perna 2:
-// pwm.setPWM(2, 0, 350);
-// pwm.setPWM(3, 0, 450);
-// pwm.setPWM(4, 0, 400);
-
-// Perna 3:
-// pwm.setPWM(5, 0, 400);
-// pwm.setPWM(6, 0, 350);
-// pwm.setPWM(7, 0, 400);
-
-// Perna 4:
-// pwm.setPWM(8, 0, 300);
-// pwm.setPWM(9, 0, 420);
-// pwm.setPWM(10, 0, 400);
-
 // Initialize WebSocketServer
 WiFiServer server(80);
 WebSocketServer webSocketServer;
@@ -88,3 +62,33 @@ int trigger1 = 5;
 void readSensor1();
 
 bool run_setUp();
+
+// For writing position to servos:
+
+void write_to_servos();
+
+// Assumindo frente como a "boca"
+// Pernas 1, 2, 3 e 4
+// 1 2
+//  x
+// 3 4
+
+// Perna 1:
+// pwm.setPWM(0, 0, 400);
+// pwm.setPWM(1, 0, 420);
+// pwm.setPWM(11, 0, 400);
+
+// Perna 2:
+// pwm.setPWM(2, 0, 350);
+// pwm.setPWM(3, 0, 450);
+// pwm.setPWM(4, 0, 400);
+
+// Perna 3:
+// pwm.setPWM(5, 0, 400);
+// pwm.setPWM(6, 0, 350);
+// pwm.setPWM(7, 0, 400);
+
+// Perna 4:
+// pwm.setPWM(8, 0, 300);
+// pwm.setPWM(9, 0, 420);
+// pwm.setPWM(10, 0, 400);

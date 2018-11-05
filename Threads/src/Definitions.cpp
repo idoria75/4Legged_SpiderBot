@@ -193,3 +193,25 @@ bool run_setUp() {
   threadConfiguration();
   threadConfiguration_sensors();
 }
+
+void write_to_servos() {
+  // Perna 1:
+  pwm.setPWM(0, 0, 400);   // SHOULDER
+  pwm.setPWM(1, 0, 420);   // FEMUR
+  pwm.setPWM(11, 0, 400);  // TIBIA
+
+  // Perna 2:
+  pwm.setPWM(2, 0, 350);  // SHOULDER
+  pwm.setPWM(3, 0, 450);  // FEMUR
+  pwm.setPWM(4, 0, 400);  // TIBIA
+
+  // Perna 3:
+  pwm.setPWM(5, 0, 400);  // SHOULDER
+  pwm.setPWM(6, 0, 350);  // FEMUR
+  pwm.setPWM(7, 0, 400);  // TIBIA
+
+  // Perna 4:
+  pwm.setPWM(8, 0, 300);   // SHOULDER
+  pwm.setPWM(9, 0, 420);   // FEMUR
+  pwm.setPWM(10, 0, 400);  // TIBIA
+}
