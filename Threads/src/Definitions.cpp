@@ -2,11 +2,6 @@
 
 int new_max = map(MAX_ANGLE, 0, 180, SERVOMIN, SERVOMAX);
 int new_min = map(MIN_ANGLE, 0, 180, SERVOMIN, SERVOMAX);
-
-void change_LED_state1() {
-  led_status1 = !led_status1;
-}
-
 int count_msgs_received = 0;
 
 // Receive data from WebSocket (WS)
@@ -121,11 +116,9 @@ void receiveDataFromWS() {
 void pinConfiguration() {
   // Pin Setup
   pinMode(LED_BUILTIN, OUTPUT);
-  // Pin Setup for FSM
-  pinMode(4, OUTPUT);
-  pinMode(13, OUTPUT);
-  pinMode(15, OUTPUT);
-  pinMode(26, OUTPUT);
+  // Pin Setup for Sensor 1
+  pinMode(echo1, INPUT);
+  pinMode(trigger1, OUTPUT);
 }
 
 void WiFiConfiguration() {
@@ -149,18 +142,18 @@ void boardConfiguration() {
 }
 
 void threadConfiguration() {
-  thread_blink.onRun([]() { change_LED_state1(); });
-  thread_blink.setInterval(100);
+  threadWebsocket.onRun([]() { receiveDataFromWS(); });
+  threadWebsocket.setInterval(1000);
 
-  t_websocket.onRun([]() { receiveDataFromWS(); });
-  t_websocket.setInterval(1000);
+  threadFSM.onRun([]() { runStateMachine(); });
+  threadFSM.setInterval(500);
 
-  thread_fsm.onRun([]() { runStateMachine(); });
-  thread_fsm.setInterval(500);
+  threadReadSensor1.onRun([]() { readSensor1(); });
+  threadReadSensor1.setInterval(500);
 
-  groupOfThreads.add(&thread_blink);
-  groupOfThreads.add(&t_websocket);
-  groupOfThreads.add(&thread_fsm);
+  groupOfThreads.add(&threadWebsocket);
+  groupOfThreads.add(&threadFSM);
+  groupOfThreads.add(&threadReadSensor1);
 }
 
 void readSensor1() {
@@ -177,41 +170,31 @@ void readSensor1() {
   Serial.println(" cm");
 }
 
-void threadConfiguration_sensors() {
-  pinMode(echo1, INPUT);
-  pinMode(trigger1, OUTPUT);
-
-  thread_readSensor1.onRun([]() { readSensor1(); });
-  thread_readSensor1.setInterval(500);
-  groupOfThreads.add(&thread_readSensor1);
-}
-
-bool run_setUp() {
+bool runSetUp() {
   pinConfiguration();
   boardConfiguration();
   WiFiConfiguration();
   threadConfiguration();
-  threadConfiguration_sensors();
 }
 
-void write_to_servos() {
+void writeToServos() {
   // Perna 1:
-  pwm.setPWM(0, 0, 400);   // SHOULDER
-  pwm.setPWM(1, 0, 420);   // FEMUR
-  pwm.setPWM(11, 0, 400);  // TIBIA
+  pwm_driver.setPWM(0, 0, 400);   // SHOULDER
+  pwm_driver.setPWM(1, 0, 420);   // FEMUR
+  pwm_driver.setPWM(11, 0, 400);  // TIBIA
 
   // Perna 2:
-  pwm.setPWM(2, 0, 350);  // SHOULDER
-  pwm.setPWM(3, 0, 450);  // FEMUR
-  pwm.setPWM(4, 0, 400);  // TIBIA
+  pwm_driver.setPWM(2, 0, 350);  // SHOULDER
+  pwm_driver.setPWM(3, 0, 450);  // FEMUR
+  pwm_driver.setPWM(4, 0, 400);  // TIBIA
 
   // Perna 3:
-  pwm.setPWM(5, 0, 400);  // SHOULDER
-  pwm.setPWM(6, 0, 350);  // FEMUR
-  pwm.setPWM(7, 0, 400);  // TIBIA
+  pwm_driver.setPWM(5, 0, 400);  // SHOULDER
+  pwm_driver.setPWM(6, 0, 350);  // FEMUR
+  pwm_driver.setPWM(7, 0, 400);  // TIBIA
 
   // Perna 4:
-  pwm.setPWM(8, 0, 300);   // SHOULDER
-  pwm.setPWM(9, 0, 420);   // FEMUR
-  pwm.setPWM(10, 0, 400);  // TIBIA
+  pwm_driver.setPWM(8, 0, 300);   // SHOULDER
+  pwm_driver.setPWM(9, 0, 420);   // FEMUR
+  pwm_driver.setPWM(10, 0, 400);  // TIBIA
 }

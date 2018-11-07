@@ -12,7 +12,7 @@ Leg leg4(3, 2, 1, 80, 90, 90);
 Robot rob(leg1, leg2, leg3, leg4);
 
 void setup() {
-  run_setUp();
+  runSetUp();
   rob.print_leg_status();
   rob.update_leg(1, 45, 45, 45);
   Serial.println("Leg A Updated!");

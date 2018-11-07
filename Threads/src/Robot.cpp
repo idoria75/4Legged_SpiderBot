@@ -1,5 +1,7 @@
 #include "Robot.h"
 
+void Robot::setDefaultPose() {}
+
 void Robot::update_leg(int leg_id,
                        int new_shoulder_angle,
                        int new_femur_angle,
@@ -22,6 +24,7 @@ void Robot::update_leg(int leg_id,
   }
 }
 
+// To-Do: Try to enhance the function below:
 void Robot::print_leg_status() {
   Serial.println("Leg A:");
   Serial.println(legA.get_shoulder_length());
