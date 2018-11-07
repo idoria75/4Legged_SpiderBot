@@ -1,6 +1,11 @@
 #include "Robot.h"
 
-void Robot::setDefaultPose() {}
+void Robot::setDefaultPose() {
+  legA.update_leg_members(10, 20, 40);
+  legB.update_leg_members(10, 20, 40);
+  legC.update_leg_members(10, 20, 40);
+  legD.update_leg_members(10, 20, 40);
+}
 
 void Robot::update_leg(int leg_id,
                        int new_shoulder_angle,

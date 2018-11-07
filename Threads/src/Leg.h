@@ -2,18 +2,10 @@
 #include <Arduino.h>
 class Leg {
  public:
-  Leg(int shoulder_len,
-      int femur_len,
-      int tibia_len,
-      int shoulder_ang,
-      int femur_ang,
-      int tibia_ang)
+  Leg(int shoulder_len, int femur_len, int tibia_len)
       : shoulder_length(shoulder_len),
         femur_length(femur_len),
-        tibia_length(tibia_len),
-        shoulder_angle(shoulder_ang),
-        femur_angle(femur_ang),
-        tibia_angle(tibia_ang){};
+        tibia_length(tibia_len){};
 
   int get_shoulder_angle();
   int get_femur_angle();
