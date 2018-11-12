@@ -128,17 +128,19 @@ bool runSetUp() {
   threadConfiguration();
 }
 
-// void writeToServos() {
-//   pwmDriver.setPWM(0, 0, 400);
-//   pwmDriver.setPWM(1, 0, 420);
-//   pwmDriver.setPWM(11, 0, 400);
-//   pwmDriver.setPWM(2, 0, 350);
-//   pwmDriver.setPWM(3, 0, 450);
-//   pwmDriver.setPWM(4, 0, 400);
-//   pwmDriver.setPWM(5, 0, 400);
-//   pwmDriver.setPWM(6, 0, 350);
-//   pwmDriver.setPWM(7, 0, 400);
-//   pwmDriver.setPWM(8, 0, 300);
-//   pwmDriver.setPWM(9, 0, 420);
-//   pwmDriver.setPWM(10, 0, 400);
-// }
+/*
+void writeToServos() {
+  pwmDriver.setPWM(0, 0, 400);
+  pwmDriver.setPWM(1, 0, 420);
+  pwmDriver.setPWM(11, 0, 400);
+  pwmDriver.setPWM(2, 0, 350);
+  pwmDriver.setPWM(3, 0, 450);
+  pwmDriver.setPWM(4, 0, 400);
+  pwmDriver.setPWM(5, 0, 400);
+  pwmDriver.setPWM(6, 0, 350);
+  pwmDriver.setPWM(7, 0, 400);
+  pwmDriver.setPWM(8, 0, 300);
+  pwmDriver.setPWM(9, 0, 420);
+  pwmDriver.setPWM(10, 0, 400);
+}
+*/

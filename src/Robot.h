@@ -19,4 +19,6 @@ class Robot {
   void printLegStatus();
   // To-Do
   void stepForward();
+
+  void serializeLegs();
 };

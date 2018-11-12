@@ -62,3 +62,7 @@ void Robot::printLegStatus() {
   Serial.println(legD.getFemurAngle());
   Serial.println(legD.getTibiaAngle());
 }
+
+void Robot::serializeLegs() {
+  Serial.println("Serialize Legs");
+}
