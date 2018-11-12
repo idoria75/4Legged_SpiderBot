@@ -13,21 +13,10 @@ class Robot {
   // Sensors!
 
  public:
-  Robot(Leg leg1, Leg leg2, Leg leg3, Leg leg4)
-      : legA(leg1), legB(leg2), legC(leg3), legD(leg4){};
-  Robot(float shoulder_length, float femur_length, float tibia_length);
+  Robot(float shoulderLength, float femurLength, float tibiaLength);
 
-  //   Robot(float shoulder_length, float femur_length, float tibia_length)
-  //       : legA(Leg(shoulder_length, femur_length, tibia_length)),
-  //         legB(Leg(shoulder_length, femur_length, tibia_length)),
-  //         legC(Leg(shoulder_length, femur_length, tibia_length)),
-  //         legD(Leg(shoulder_length, femur_length, tibia_length)){};
-
-  void update_leg(int leg_id,
-                  int shoulder_angle,
-                  int femur_angle,
-                  int tibia_angle);
-  void print_leg_status();
+  void updateLeg(int legId, int shoulderAngle, int femurAngle, int tibiaAngle);
+  void printLegStatus();
   // To-Do
-  void step_forward();
+  void stepForward();
 };

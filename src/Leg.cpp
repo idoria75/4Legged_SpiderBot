@@ -1,47 +1,47 @@
 #include "Leg.h"
 
-Leg::Leg(float shoulder_length, float femur_length, float tibia_length) {}
+Leg::Leg(float shoulderLength, float femurLength, float tibiaLength) {}
 
-void Leg::update_leg_members(uint8_t new_shoulder_angle,
-                             uint8_t new_femur_angle,
-                             uint8_t new_tibia_angle) {
-  update_shoulder_angle(new_shoulder_angle);
-  update_femur_angle(new_femur_angle);
-  update_tibia_angle(new_tibia_angle);
+void Leg::updateLegMembers(uint8_t newShoulderAngle,
+                           uint8_t newFemurAngle,
+                           uint8_t newTibiaAngle) {
+  updateShoulderAngle(newShoulderAngle);
+  updatefemurAngle(newFemurAngle);
+  updateTibiaAngle(newTibiaAngle);
 }
 
-void Leg::update_shoulder_angle(uint8_t new_shoulder_angle) {
-  shoulder_angle = new_shoulder_angle;
+void Leg::updateShoulderAngle(uint8_t newShoulderAngle) {
+  shoulderAngle = newShoulderAngle;
 }
 
-void Leg::update_femur_angle(uint8_t new_femur_angle) {
-  femur_angle = new_femur_angle;
+void Leg::updatefemurAngle(uint8_t newFemurAngle) {
+  femurAngle = newFemurAngle;
 }
 
-void Leg::update_tibia_angle(uint8_t new_tibia_angle) {
-  tibia_angle = new_tibia_angle;
+void Leg::updateTibiaAngle(uint8_t newTibiaAngle) {
+  tibiaAngle = newTibiaAngle;
 }
 
-uint8_t Leg::get_shoulder_angle() {
-  return shoulder_angle;
+uint8_t Leg::getShoulderAngle() {
+  return shoulderAngle;
 }
 
-uint8_t Leg::get_femur_angle() {
-  return femur_angle;
+uint8_t Leg::getFemurAngle() {
+  return femurAngle;
 }
 
-uint8_t Leg::get_tibia_angle() {
-  return tibia_angle;
+uint8_t Leg::getTibiaAngle() {
+  return tibiaAngle;
 }
 
-float Leg::get_shoulder_length() {
-  return shoulder_length;
+float Leg::getShoulderLength() {
+  return shoulderLength;
 }
 
-float Leg::get_femur_length() {
-  return femur_length;
+float Leg::getFemurLength() {
+  return femurLength;
 }
 
-float Leg::get_tibia_length() {
-  return tibia_length;
+float Leg::getTibiaLength() {
+  return tibiaLength;
 }
