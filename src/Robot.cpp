@@ -1,5 +1,11 @@
 #include "Robot.h"
 
+Robot::Robot(float shoulder_length, float femur_length, float tibia_length)
+    : legA(Leg(shoulder_length, femur_length, tibia_length)),
+      legB(Leg(shoulder_length, femur_length, tibia_length)),
+      legC(Leg(shoulder_length, femur_length, tibia_length)),
+      legD(Leg(shoulder_length, femur_length, tibia_length)){};
+
 void Robot::setDefaultPose() {
   legA.update_leg_members(10, 20, 40);
   legB.update_leg_members(10, 20, 40);

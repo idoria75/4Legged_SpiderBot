@@ -2,29 +2,29 @@
 #include <Arduino.h>
 class Leg {
  public:
-  Leg(int shoulder_len, int femur_len, int tibia_len)
-      : shoulder_length(shoulder_len),
-        femur_length(femur_len),
-        tibia_length(tibia_len){};
-
-  int get_shoulder_angle();
-  int get_femur_angle();
-  int get_tibia_angle();
-  int get_shoulder_length();
-  int get_femur_length();
-  int get_tibia_length();
-  void update_leg_members(int new_shoulder_angle,
-                          int new_femur_angle,
-                          int new_tibia_angle);
+  // Leg(int shoulder_len, int femur_len, int tibia_len)
+  //     : shoulder_length(shoulder_len),
+  //       femur_length(femur_len),
+  //       tibia_length(tibia_len){};
+  Leg(float shoulder_len, float femur_len, float tibia_len);
+  uint8_t get_shoulder_angle();
+  uint8_t get_femur_angle();
+  uint8_t get_tibia_angle();
+  float get_shoulder_length();
+  float get_femur_length();
+  float get_tibia_length();
+  void update_leg_members(uint8_t new_shoulder_angle,
+                          uint8_t new_femur_angle,
+                          uint8_t new_tibia_angle);
 
  private:
-  int shoulder_length;
-  int femur_length;
-  int tibia_length;
-  int shoulder_angle;
-  int femur_angle;
-  int tibia_angle;
-  void update_shoulder_angle(int new_shoulder_angle);
-  void update_femur_angle(int new_femur_angle);
-  void update_tibia_angle(int new_tibia_angle);
+  float shoulder_length;
+  float femur_length;
+  float tibia_length;
+  uint8_t shoulder_angle;
+  uint8_t femur_angle;
+  uint8_t tibia_angle;
+  void update_shoulder_angle(uint8_t new_shoulder_angle);
+  void update_femur_angle(uint8_t new_femur_angle);
+  void update_tibia_angle(uint8_t new_tibia_angle);
 };

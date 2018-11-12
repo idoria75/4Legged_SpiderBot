@@ -5,11 +5,12 @@ Developed by Ivan Posca Doria (ivanpdoria@gmail.com)
 #include "Definitions.h"
 
 // Rever necessidade de alocar memoria para o robo dinamicamente
-Leg leg1(5, 3, 2);
-Leg leg2(2, 4, 4);
-Leg leg3(6, 5, 3);
-Leg leg4(3, 2, 1);
-Robot rob(leg1, leg2, leg3, leg4);
+// Leg leg1(5, 3, 2);
+// Leg leg2(2, 4, 4);
+// Leg leg3(6, 5, 3);
+// Leg leg4(3, 2, 1);
+// Robot rob(leg1, leg2, leg3, leg4);
+Robot rob(2, 3, 4);
 
 void setup() {
   runSetUp();
