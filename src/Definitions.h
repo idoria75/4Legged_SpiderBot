@@ -46,16 +46,6 @@ void boardConfiguration();
 void WiFiConfiguration();
 void threadConfiguration();
 
-long duration1, distance1;
-int echo1 = 5;
-int trigger1 = 18;
-int echo2 = 26;
-int trigger2 = 25;
-int echo3 = 33;
-int trigger3 = 32;
-int echo4 = 14;
-int trigger4 = 27;
-
 bool runSetUp();
 
 // void writeToServos();

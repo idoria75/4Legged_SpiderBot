@@ -4,7 +4,11 @@ Robot::Robot(float shoulderLength, float femurLength, float tibiaLength)
     : legA(Leg(shoulderLength, femurLength, tibiaLength)),
       legB(Leg(shoulderLength, femurLength, tibiaLength)),
       legC(Leg(shoulderLength, femurLength, tibiaLength)),
-      legD(Leg(shoulderLength, femurLength, tibiaLength)){};
+      legD(Leg(shoulderLength, femurLength, tibiaLength)),
+      sFront(SENSOR_FRONT_ECHO, SENSOR_FRONT_TRIGGER),
+      sBack(SENSOR_BACK_ECHO, SENSOR_BACK_TRIGGER),
+      sLeft(SENSOR_LEFT_ECHO, SENSOR_LEFT_TRIGGER),
+      sRight(SENSOR_RIGHT_ECHO, SENSOR_RIGHT_TRIGGER){};
 
 void Robot::setDefaultPose() {
   legA.updateLegMembers(10, 20, 40);
@@ -65,4 +69,11 @@ void Robot::printLegStatus() {
 
 void Robot::serializeLegs() {
   Serial.println("Serialize Legs");
+}
+
+String Robot::getSensorSetup() {
+  String data;
+  data = "Front: " + sFront.getSetup() + "\nBack: " + sBack.getSetup() +
+         "\nLeft: " + sLeft.getSetup() + "\nRight:" + sRight.getSetup() + ".";
+  return data;
 }

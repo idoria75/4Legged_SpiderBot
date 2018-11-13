@@ -37,7 +37,7 @@ void receiveDataFromWS() {
         StaticJsonBuffer<BUFFER_SIZE_SEND> jsonBuffer_send;
         JsonObject& root_send = jsonBuffer_send.createObject();
         JsonArray& sensor_data = root_send.createNestedArray("sensors");
-        sensor_data.add(distance1);
+        sensor_data.add(20);  // sensor_data.add(distance1);
         sensor_data.add(22);
         sensor_data.add(23);
         sensor_data.add(24);
