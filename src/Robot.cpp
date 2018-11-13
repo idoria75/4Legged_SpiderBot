@@ -10,31 +10,6 @@ Robot::Robot(float shoulderLength, float femurLength, float tibiaLength)
       sLeft(SENSOR_LEFT_ECHO, SENSOR_LEFT_TRIGGER),
       sRight(SENSOR_RIGHT_ECHO, SENSOR_RIGHT_TRIGGER){};
 
-void Robot::setDefaultPose() {
-  legA.updateLegMembers(10, 20, 40);
-  legB.updateLegMembers(10, 20, 40);
-  legC.updateLegMembers(10, 20, 40);
-  legD.updateLegMembers(10, 20, 40);
-}
-
-void Robot::updateLeg(int legId,
-                      int newShoulderAngle,
-                      int newFemurAngle,
-                      int newTibiaAngle) {
-  if (legId == 1) {
-    legA.updateLegMembers(newShoulderAngle, newFemurAngle, newTibiaAngle);
-  }
-  if (legId == 2) {
-    legB.updateLegMembers(newShoulderAngle, newFemurAngle, newTibiaAngle);
-  }
-  if (legId == 3) {
-    legC.updateLegMembers(newShoulderAngle, newFemurAngle, newTibiaAngle);
-  }
-  if (legId == 4) {
-    legD.updateLegMembers(newShoulderAngle, newFemurAngle, newTibiaAngle);
-  }
-}
-
 String Robot::serializeLegs() {
   // Serial.println("Serialize Legs!");
   StaticJsonBuffer<BUFFER_SIZE> jsonBuffer;
@@ -52,19 +27,12 @@ String Robot::serializeLegs() {
   legCData.add(legC.getFemurAngle());
   legCData.add(legC.getTibiaAngle());
   JsonArray& legDData = root.createNestedArray("leg D");
-  legDData.add(legC.getShoulderAngle());
-  legDData.add(legC.getFemurAngle());
-  legDData.add(legC.getTibiaAngle());
+  legDData.add(legD.getShoulderAngle());
+  legDData.add(legD.getFemurAngle());
+  legDData.add(legD.getTibiaAngle());
   char jsonChar[512];
   root.printTo((char*)jsonChar, root.measureLength() + 1);
   return jsonChar;
-}
-
-String Robot::getSensorSetup() {
-  String data;
-  data = "Front: " + sFront.getSetup() + "\nBack: " + sBack.getSetup() +
-         "\nLeft: " + sLeft.getSetup() + "\nRight:" + sRight.getSetup() + ".";
-  return data;
 }
 
 String Robot::getDistances() {
@@ -74,4 +42,16 @@ String Robot::getDistances() {
          "cm\nLeft: " + String(sLeft.getDistance()) +
          "cm\nRight:" + String(sRight.getDistance()) + "cm.";
   return data;
+}
+
+String Robot::serializeDistances() {
+  StaticJsonBuffer<BUFFER_SIZE> jsonBuffer;
+  JsonObject& root = jsonBuffer.createObject();
+  root["front"] = sFront.getDistance();
+  root["back"] = sBack.getDistance();
+  root["left"] = sLeft.getDistance();
+  root["right"] = sRight.getDistance();
+  char jsonChar[512];
+  root.printTo((char*)jsonChar, root.measureLength() + 1);
+  return jsonChar;
 }

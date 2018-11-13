@@ -8,9 +8,8 @@
 #include <WiFi.h>
 #include <Wire.h>
 
-#include "FSM.h"
+#include "Fsm.h"
 #include "Robot.h"
-
 Adafruit_PWMServoDriver pwmDriver = Adafruit_PWMServoDriver();
 
 #define SERVOMIN 150  // this is the 'minimum' pulse length count (out of 4096)
@@ -30,8 +29,8 @@ WebSocketServer webSocketServer;
 const char* ssid = "SPIDERBOT";
 const char* password = "seashell";
 
-// Defines threads and their controller:
-Thread threadFSM, threadWebsocket;
+// Dfines threads and their controller:
+Thread threadWebsocket;
 ThreadController groupOfThreads = ThreadController();
 
 // String to receive data from WS
@@ -43,7 +42,4 @@ void pinConfiguration();
 void boardConfiguration();
 void wifiConfiguration();
 void threadConfiguration();
-
-bool runSetUp();
-
-// void writeToServos();
+void runSetUp();

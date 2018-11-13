@@ -13,6 +13,7 @@
 #define SENSOR_RIGHT_ECHO 14
 #define SENSOR_RIGHT_TRIGGER 27
 #define BUFFER_SIZE 512
+
 class Robot {
  private:
   Leg legA;
@@ -28,9 +29,8 @@ class Robot {
 
  public:
   Robot(float shoulderLength, float femurLength, float tibiaLength);
-  void updateLeg(int legId, int shoulderAngle, int femurAngle, int tibiaAngle);
-  String serializeLegs();
-  String getSensorSetup();
   String getDistances();
+  String serializeLegs();
+  String serializeDistances();
   void stepForward();
 };

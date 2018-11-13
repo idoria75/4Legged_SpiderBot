@@ -9,9 +9,6 @@ class Leg {
   float getShoulderLength();
   float getFemurLength();
   float getTibiaLength();
-  void updateLegMembers(uint8_t newShoulderAngle,
-                        uint8_t newFemurAngle,
-                        uint8_t newTibiaAngle);
 
  private:
   float shoulderLength;
@@ -23,4 +20,7 @@ class Leg {
   void updateShoulderAngle(uint8_t newShoulderAngle);
   void updatefemurAngle(uint8_t newFemurAngle);
   void updateTibiaAngle(uint8_t newTibiaAngle);
+  void updateLegMembers(uint8_t newShoulderAngle,
+                        uint8_t newFemurAngle,
+                        uint8_t newTibiaAngle);
 };

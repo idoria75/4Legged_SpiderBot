@@ -18,6 +18,7 @@ void loop() {
   if (millis() - timeSince > 1000) {
     Serial.println("Serialization: ");
     Serial.println(rob.serializeLegs());
+    Serial.println(rob.serializeDistances());
     timeSince = millis();
   }
   groupOfThreads.run();
