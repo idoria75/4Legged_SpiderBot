@@ -1,6 +1,7 @@
 #pragma once
 #include <Arduino.h>
 #include "Leg.h"
+#include "USensor.h"
 
 class Robot {
  private:

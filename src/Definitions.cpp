@@ -79,8 +79,6 @@ void receiveDataFromWS() {
 
 void pinConfiguration() {
   pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(echo1, INPUT);
-  pinMode(trigger1, OUTPUT);
 }
 
 void WiFiConfiguration() {
@@ -92,38 +90,18 @@ void WiFiConfiguration() {
   server.begin();
 }
 
-void boardConfiguration() {
-  pinConfiguration();
-  Serial.begin(115200);
-}
-
 void threadConfiguration() {
   threadWebsocket.onRun([]() { receiveDataFromWS(); });
   threadWebsocket.setInterval(1000);
   threadFSM.onRun([]() { runStateMachine(); });
   threadFSM.setInterval(500);
-  threadReadSensor1.onRun([]() { readSensor1(); });
-  threadReadSensor1.setInterval(500);
   groupOfThreads.add(&threadWebsocket);
   groupOfThreads.add(&threadFSM);
-  groupOfThreads.add(&threadReadSensor1);
-}
-
-void readSensor1() {
-  digitalWrite(trigger1, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigger1, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigger1, LOW);
-  duration1 = pulseIn(echo1, HIGH);
-  distance1 = (duration1 / 2) / 29.1;
-  Serial.print(distance1);
-  Serial.println(" cm");
 }
 
 bool runSetUp() {
+  Serial.begin(115200);
   pinConfiguration();
-  boardConfiguration();
   WiFiConfiguration();
   threadConfiguration();
 }

@@ -31,7 +31,7 @@ const char* ssid = "SPIDERBOT";
 const char* password = "seashell";
 
 // Defines threads and their controller:
-Thread threadFSM, threadWebsocket, threadReadSensor1;
+Thread threadFSM, threadWebsocket;
 ThreadController groupOfThreads = ThreadController();
 
 WiFiClient client;
@@ -55,8 +55,6 @@ int echo3 = 33;
 int trigger3 = 32;
 int echo4 = 14;
 int trigger4 = 27;
-
-void readSensor1();
 
 bool runSetUp();
 
