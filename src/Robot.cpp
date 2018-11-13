@@ -35,40 +35,29 @@ void Robot::updateLeg(int legId,
   }
 }
 
-// To-Do: Try to enhance the function below:
-void Robot::printLegStatus() {
-  Serial.println("Leg A:");
-  Serial.println(legA.getShoulderLength());
-  Serial.println(legA.getFemurLength());
-  Serial.println(legA.getTibiaLength());
-  Serial.println(legA.getShoulderAngle());
-  Serial.println(legA.getFemurAngle());
-  Serial.println(legA.getTibiaAngle());
-  Serial.println("Leg B:");
-  Serial.println(legB.getShoulderLength());
-  Serial.println(legB.getFemurLength());
-  Serial.println(legB.getTibiaLength());
-  Serial.println(legB.getShoulderAngle());
-  Serial.println(legB.getFemurAngle());
-  Serial.println(legB.getTibiaAngle());
-  Serial.println("Leg C:");
-  Serial.println(legC.getShoulderLength());
-  Serial.println(legC.getFemurLength());
-  Serial.println(legC.getTibiaLength());
-  Serial.println(legC.getShoulderAngle());
-  Serial.println(legC.getFemurAngle());
-  Serial.println(legC.getTibiaAngle());
-  Serial.println("Leg D:");
-  Serial.println(legD.getShoulderLength());
-  Serial.println(legD.getFemurLength());
-  Serial.println(legD.getTibiaLength());
-  Serial.println(legD.getShoulderAngle());
-  Serial.println(legD.getFemurAngle());
-  Serial.println(legD.getTibiaAngle());
-}
-
-void Robot::serializeLegs() {
-  Serial.println("Serialize Legs");
+String Robot::serializeLegs() {
+  // Serial.println("Serialize Legs!");
+  StaticJsonBuffer<BUFFER_SIZE> jsonBuffer;
+  JsonObject& root = jsonBuffer.createObject();
+  JsonArray& legAData = root.createNestedArray("leg A");
+  legAData.add(legA.getShoulderAngle());
+  legAData.add(legA.getFemurAngle());
+  legAData.add(legA.getTibiaAngle());
+  JsonArray& legBData = root.createNestedArray("leg B");
+  legBData.add(legB.getShoulderAngle());
+  legBData.add(legB.getFemurAngle());
+  legBData.add(legB.getTibiaAngle());
+  JsonArray& legCData = root.createNestedArray("leg C");
+  legCData.add(legC.getShoulderAngle());
+  legCData.add(legC.getFemurAngle());
+  legCData.add(legC.getTibiaAngle());
+  JsonArray& legDData = root.createNestedArray("leg D");
+  legDData.add(legC.getShoulderAngle());
+  legDData.add(legC.getFemurAngle());
+  legDData.add(legC.getTibiaAngle());
+  char jsonChar[512];
+  root.printTo((char*)jsonChar, root.measureLength() + 1);
+  return jsonChar;
 }
 
 String Robot::getSensorSetup() {

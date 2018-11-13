@@ -6,6 +6,8 @@ int count_msgs_received = 0;
 
 // Receive data from WebSocket (WS)
 void receiveDataFromWS() {
+  WiFiClient client;
+  String data;
   if (!flagIsConnectedToClient) {
     client = server.available();
     if (client.connected() && webSocketServer.handshake(client)) {
@@ -21,48 +23,48 @@ void receiveDataFromWS() {
       if (data.length() > 0) {
         char data_buf[BUFFER_SIZE_RECV];
         data.toCharArray(data_buf, BUFFER_SIZE_RECV);
-        StaticJsonBuffer<BUFFER_SIZE_RECV> jsonBuffer_recv;
-        JsonObject& root_recv = jsonBuffer_recv.parseObject(data_buf);
-        if (!root_recv.success()) {
+        StaticJsonBuffer<BUFFER_SIZE_RECV> jsonBufferRecv;
+        JsonObject& rootRecv = jsonBufferRecv.parseObject(data_buf);
+        if (!rootRecv.success()) {
           Serial.println("parseObject() failed");
           webSocketServer.sendData("Error!");
           return;
         }
         Serial.print("Mode: ");
-        const char* mode = root_recv["mode"];
+        const char* mode = rootRecv["mode"];
         Serial.println(mode);
         Serial.print("Ref: ");
-        const char* ref = root_recv["gaitDirection"];
+        const char* ref = rootRecv["gaitDirection"];
         Serial.println(ref);
-        StaticJsonBuffer<BUFFER_SIZE_SEND> jsonBuffer_send;
-        JsonObject& root_send = jsonBuffer_send.createObject();
-        JsonArray& sensor_data = root_send.createNestedArray("sensors");
-        sensor_data.add(20);  // sensor_data.add(distance1);
-        sensor_data.add(22);
-        sensor_data.add(23);
-        sensor_data.add(24);
-        JsonArray& imu_data = root_send.createNestedArray("imu");
-        imu_data.add(20.575);
-        imu_data.add(25.678);
-        imu_data.add(30.123);
-        JsonArray& legA_data = root_send.createNestedArray("legA");
-        legA_data.add(20);
-        legA_data.add(25);
-        legA_data.add(30);
-        JsonArray& legB_data = root_send.createNestedArray("legB");
-        legB_data.add(20);
-        legB_data.add(25);
-        legB_data.add(30);
-        JsonArray& legC_data = root_send.createNestedArray("legC");
-        legC_data.add(20);
-        legC_data.add(25);
-        legC_data.add(30);
-        JsonArray& legD_data = root_send.createNestedArray("legD");
-        legD_data.add(20);
-        legD_data.add(25);
-        legD_data.add(30);
+        StaticJsonBuffer<BUFFER_SIZE_SEND> jsonBufferSend;
+        JsonObject& rootSend = jsonBufferSend.createObject();
+        JsonArray& sensorData = rootSend.createNestedArray("sensors");
+        sensorData.add(20);  // sensorData.add(distance1);
+        sensorData.add(22);
+        sensorData.add(23);
+        sensorData.add(24);
+        JsonArray& imuData = rootSend.createNestedArray("imu");
+        imuData.add(20.575);
+        imuData.add(25.678);
+        imuData.add(30.123);
+        JsonArray& legAData = rootSend.createNestedArray("legA");
+        legAData.add(20);
+        legAData.add(25);
+        legAData.add(30);
+        JsonArray& legBData = rootSend.createNestedArray("legB");
+        legBData.add(20);
+        legBData.add(25);
+        legBData.add(30);
+        JsonArray& legCData = rootSend.createNestedArray("legC");
+        legCData.add(20);
+        legCData.add(25);
+        legCData.add(30);
+        JsonArray& legDData = rootSend.createNestedArray("legD");
+        legDData.add(20);
+        legDData.add(25);
+        legDData.add(30);
         char jsonChar[BUFFER_SIZE_SEND];
-        root_send.printTo((char*)jsonChar, root_send.measureLength() + 1);
+        rootSend.printTo((char*)jsonChar, rootSend.measureLength() + 1);
         webSocketServer.sendData(jsonChar);
       }
     }
@@ -77,11 +79,7 @@ void receiveDataFromWS() {
   delay(10);
 }
 
-void pinConfiguration() {
-  pinMode(LED_BUILTIN, OUTPUT);
-}
-
-void WiFiConfiguration() {
+void wifiConfiguration() {
   Serial.println("Setting up ESP32 as Access Point");
   WiFi.softAP(ssid);
   IPAddress IP = WiFi.softAPIP();
@@ -95,14 +93,14 @@ void threadConfiguration() {
   threadWebsocket.setInterval(1000);
   threadFSM.onRun([]() { runStateMachine(); });
   threadFSM.setInterval(500);
-  groupOfThreads.add(&threadWebsocket);
-  groupOfThreads.add(&threadFSM);
+  // groupOfThreads.add(&threadWebsocket);
+  // groupOfThreads.add(&threadFSM);
 }
 
 bool runSetUp() {
   Serial.begin(115200);
-  pinConfiguration();
-  WiFiConfiguration();
+  pinMode(LED_BUILTIN, OUTPUT);
+  wifiConfiguration();
   threadConfiguration();
 }
 

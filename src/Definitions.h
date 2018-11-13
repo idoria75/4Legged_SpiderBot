@@ -34,16 +34,14 @@ const char* password = "seashell";
 Thread threadFSM, threadWebsocket;
 ThreadController groupOfThreads = ThreadController();
 
-WiFiClient client;
 // String to receive data from WS
-String data;
 bool flagIsConnectedToClient = false;
 bool flagWasConnectedToClient = false;
 void receiveDataFromWS();
 
 void pinConfiguration();
 void boardConfiguration();
-void WiFiConfiguration();
+void wifiConfiguration();
 void threadConfiguration();
 
 bool runSetUp();

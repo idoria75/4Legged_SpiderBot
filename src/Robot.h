@@ -1,5 +1,6 @@
 #pragma once
 #include <Arduino.h>
+#include <ArduinoJson.h>
 #include "Leg.h"
 #include "USensor.h"
 
@@ -11,7 +12,7 @@
 #define SENSOR_LEFT_TRIGGER 32
 #define SENSOR_RIGHT_ECHO 14
 #define SENSOR_RIGHT_TRIGGER 27
-
+#define BUFFER_SIZE 512
 class Robot {
  private:
   Leg legA;
@@ -24,19 +25,12 @@ class Robot {
   USensor sRight;
   int aux;
   void setDefaultPose();
-  // Sensors!
 
  public:
   Robot(float shoulderLength, float femurLength, float tibiaLength);
-
   void updateLeg(int legId, int shoulderAngle, int femurAngle, int tibiaAngle);
-  void printLegStatus();
-  // To-Do
-  void stepForward();
-
-  void serializeLegs();
-
+  String serializeLegs();
   String getSensorSetup();
-
   String getDistances();
+  void stepForward();
 };

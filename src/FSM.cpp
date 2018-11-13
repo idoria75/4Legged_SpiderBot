@@ -77,8 +77,8 @@ void updateStateMachine() {
 
 void runStateMachine() {
   updateStateMachine();
-  digitalWrite(4, led_4);
-  digitalWrite(13, led_13);
-  digitalWrite(15, led_15);
-  digitalWrite(26, led_26);
+  // digitalWrite(4, led_4);
+  // digitalWrite(13, led_13);
+  // digitalWrite(15, led_15);
+  // digitalWrite(26, led_26);
 }
