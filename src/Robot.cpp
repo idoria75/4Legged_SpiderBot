@@ -77,3 +77,12 @@ String Robot::getSensorSetup() {
          "\nLeft: " + sLeft.getSetup() + "\nRight:" + sRight.getSetup() + ".";
   return data;
 }
+
+String Robot::getDistances() {
+  String data;
+  data = "Front: " + String(sFront.getDistance()) +
+         "cm\nBack: " + String(sBack.getDistance()) +
+         "cm\nLeft: " + String(sLeft.getDistance()) +
+         "cm\nRight:" + String(sRight.getDistance()) + "cm.";
+  return data;
+}
