@@ -9,6 +9,8 @@ Robot rob(2, 3, 4);
 
 unsigned long timeSince = 0;
 
+Adafruit_PWMServoDriver Leg::pwmDriver = Adafruit_PWMServoDriver();
+
 void setup() {
   runSetUp();
 }
