@@ -55,3 +55,16 @@ String Robot::serializeDistances() {
   root.printTo((char*)jsonChar, root.measureLength() + 1);
   return jsonChar;
 }
+
+void Robot::setDefaultPose() {
+  legA.setDefaultPosition();
+  legB.setDefaultPosition();
+  legC.setDefaultPosition();
+  legD.setDefaultPosition();
+}
+void Robot::setAnotherPose() {
+  legA.setAnotherPosition();
+  legB.setAnotherPosition();
+  legC.setAnotherPosition();
+  legD.setAnotherPosition();
+}

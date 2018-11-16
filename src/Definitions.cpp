@@ -5,9 +5,9 @@ int new_min = map(MIN_ANGLE, 0, 180, SERVOMIN, SERVOMAX);
 int count_msgs_received = 0;
 
 // Receive data from WebSocket (WS)
+WiFiClient client;
+String data;
 void receiveDataFromWS() {
-  WiFiClient client;
-  String data;
   if (!flagIsConnectedToClient) {
     client = server.available();
     if (client.connected() && webSocketServer.handshake(client)) {
@@ -20,6 +20,8 @@ void receiveDataFromWS() {
   if (flagIsConnectedToClient) {
     if (client.connected()) {
       data = webSocketServer.getData();
+      Serial.print("Data: ");
+      Serial.println(data);
       if (data.length() > 0) {
         char data_buf[BUFFER_SIZE_RECV];
         data.toCharArray(data_buf, BUFFER_SIZE_RECV);
@@ -65,6 +67,7 @@ void receiveDataFromWS() {
         legDData.add(30);
         char jsonChar[BUFFER_SIZE_SEND];
         rootSend.printTo((char*)jsonChar, rootSend.measureLength() + 1);
+        Serial.println(jsonChar);
         webSocketServer.sendData(jsonChar);
       }
     }
@@ -93,7 +96,7 @@ void threadConfiguration() {
   threadWebsocket.setInterval(1000);
   // threadFSM.onRun([]() { runStateMachine(); });
   // threadFSM.setInterval(500);
-  // groupOfThreads.add(&threadWebsocket);
+  groupOfThreads.add(&threadWebsocket);
   // groupOfThreads.add(&threadFSM);
 }
 

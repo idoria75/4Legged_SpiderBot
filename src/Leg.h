@@ -16,6 +16,8 @@ class Leg {
   float getShoulderLength();
   float getFemurLength();
   float getTibiaLength();
+  void setDefaultPosition();
+  void setAnotherPosition();
 
  private:
   static Adafruit_PWMServoDriver pwmDriver;

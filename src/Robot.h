@@ -25,7 +25,8 @@ class Robot {
   USensor sLeft;
   USensor sRight;
   int aux;
-  void setDefaultPose();
+  // void setDefaultPose();
+  // void setAnotherPose();
 
  public:
   Robot(float shoulderLength, float femurLength, float tibiaLength);
@@ -33,4 +34,6 @@ class Robot {
   String serializeLegs();
   String serializeDistances();
   void stepForward();
+  void setDefaultPose();
+  void setAnotherPose();
 };

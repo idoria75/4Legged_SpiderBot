@@ -15,12 +15,22 @@ void setup() {
   runSetUp();
 }
 
+bool flag = 0;
+
 void loop() {
   // Serial.println(rob.getDistances());
   if (millis() - timeSince > 1000) {
+    // Serial.println(rob.serializeDistances());
+    Serial.print("Millis: ");
+    Serial.println(millis());
+    if (flag) {
+      rob.setDefaultPose();
+    } else {
+      rob.setAnotherPose();
+    }
     Serial.println("Serialization: ");
     Serial.println(rob.serializeLegs());
-    Serial.println(rob.serializeDistances());
+    flag = !flag;
     timeSince = millis();
   }
   groupOfThreads.run();

@@ -2,6 +2,14 @@
 
 Leg::Leg(float shoulderLength, float femurLength, float tibiaLength) {}
 
+void Leg::setDefaultPosition() {
+  updateLegMembers(10, 20, 30);
+}
+
+void Leg::setAnotherPosition() {
+  updateLegMembers(20, 80, 40);
+}
+
 void Leg::updateLegMembers(uint8_t newShoulderAngle,
                            uint8_t newFemurAngle,
                            uint8_t newTibiaAngle) {
