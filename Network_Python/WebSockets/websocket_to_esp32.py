@@ -9,7 +9,7 @@ import websocket
 import time
 import json
 
-time_between_messages = .2
+time_between_messages = .1
 # Define websocket and connect to server
 ws = websocket.WebSocket()
 ws.connect("ws://192.168.4.1/")
@@ -24,19 +24,21 @@ while i < nrOfMessages:
         "gaitDirection": "forward"
     }
     y = json.dumps(x)
-    #print("Sent: ")
-    #print(y)
+    print("Sent: ")
+    print(y)
     ws.send(y)
 
     #ws.send("Message Number: " + str(i))
     # Gets reply from server
     result = ws.recv()
-    result_parsed = json.loads(result)
-    #print("Received: ")
-    #print(result)
-    print("Parsed: ")
-    print(result_parsed)
-    i = i+1
+    print(result)
+    if(result != "Error!"):
+	result_parsed = json.loads(result)
+        print("Received: ")
+        print(result)
+        print("Parsed: ")
+        print(result_parsed)
+        i = i+1
     time.sleep(time_between_messages)
 
 ws.close()
