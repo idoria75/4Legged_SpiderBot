@@ -17,7 +17,7 @@ void setup() {
   runSetUp();
   rob.getMotorNumbers();
   Ota::self();
-  digitalWrite(LED_BUILTIN, HIGH);
+  digitalWrite(LED_BUILTIN, LOW);
 }
 
 bool flag = 0;
