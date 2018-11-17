@@ -1,6 +1,24 @@
 #include "Leg.h"
 
-Leg::Leg(float shoulderLength, float femurLength, float tibiaLength) {}
+Leg::Leg(float shoulderLen,
+         float femurLen,
+         float tibiaLen,
+         uint8_t shoulderMotNum,
+         uint8_t femurMotNum,
+         uint8_t tibiaMotNum) {
+  shoulderLength = shoulderLen;
+  femurLength = femurLen;
+  tibiaLength = tibiaLen;
+  shoulderMotorNumber = shoulderMotNum;
+  femurMotorNumber = femurMotNum;
+  tibiaMotorNumber = tibiaMotNum;
+}
+
+void Leg::getMotorNumbers() {
+  Serial.println(shoulderMotorNumber);
+  Serial.println(femurMotorNumber);
+  Serial.println(tibiaMotorNumber);
+}
 
 void Leg::setDefaultPosition() {
   updateLegMembers(10, 20, 30);

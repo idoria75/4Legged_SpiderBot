@@ -9,7 +9,12 @@
 
 class Leg {
  public:
-  Leg(float shoulder_len, float femur_len, float tibia_len);
+  Leg(float shoulderLen,
+      float femurLen,
+      float tibiaLen,
+      uint8_t shoulderMotNum,
+      uint8_t femurMotNum,
+      uint8_t tibiaMotNum);
   uint8_t getShoulderAngle();
   uint8_t getFemurAngle();
   uint8_t getTibiaAngle();
@@ -18,9 +23,13 @@ class Leg {
   float getTibiaLength();
   void setDefaultPosition();
   void setAnotherPosition();
+  void getMotorNumbers();
 
  private:
   static Adafruit_PWMServoDriver pwmDriver;
+  uint8_t shoulderMotorNumber;
+  uint8_t femurMotorNumber;
+  uint8_t tibiaMotorNumber;
   float shoulderLength;
   float femurLength;
   float tibiaLength;

@@ -14,6 +14,19 @@
 #define SENSOR_RIGHT_TRIGGER 27
 #define BUFFER_SIZE 512
 
+#define LEG_A_SHOULDER 0
+#define LEG_A_FEMUR 1
+#define LEG_A_TIBIA 15
+#define LEG_B_SHOULDER 2
+#define LEG_B_FEMUR 3
+#define LEG_B_TIBIA 4
+#define LEG_C_SHOULDER 5
+#define LEG_C_FEMUR 6
+#define LEG_C_TIBIA 8
+#define LEG_D_SHOULDER 9
+#define LEG_D_FEMUR 10
+#define LEG_D_TIBIA 12
+
 class Robot {
  private:
   Leg legA;
@@ -36,4 +49,5 @@ class Robot {
   void stepForward();
   void setDefaultPose();
   void setAnotherPose();
+  void getMotorNumbers();
 };

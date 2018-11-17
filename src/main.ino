@@ -1,3 +1,5 @@
+
+
 /*
 Developed by Ivan Posca Doria (ivanpdoria@gmail.com)
 */
@@ -13,6 +15,8 @@ Adafruit_PWMServoDriver Leg::pwmDriver = Adafruit_PWMServoDriver();
 
 void setup() {
   runSetUp();
+  rob.getMotorNumbers();
+  Ota::self();
 }
 
 bool flag = 0;
@@ -20,7 +24,6 @@ bool flag = 0;
 void loop() {
   // Serial.println(rob.getDistances());
   if (millis() - timeSince > 1000) {
-    // Serial.println(rob.serializeDistances());
     Serial.print("Millis: ");
     Serial.println(millis());
     if (flag) {
@@ -30,9 +33,11 @@ void loop() {
     }
     Serial.println("Serialization: ");
     Serial.println(rob.serializeLegs());
+    Serial.println(rob.serializeDistances());
     flag = !flag;
     timeSince = millis();
   }
   groupOfThreads.run();
+  Ota::self().handle();
   yield();
 }
