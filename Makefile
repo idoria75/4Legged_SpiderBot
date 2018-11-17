@@ -5,10 +5,10 @@ BUILD_DIR = ${PWD}/build
 MAIN_FILE = main.ino
 TOOLS = ${PWD}/tools
 
-PACKAGE = esp8266
-ARCH = esp8266
-BOARD = nodemcuv2
-PARAMETER = CpuFrequency=160,FlashSize=4M3M,UploadSpeed=921600
+PACKAGE = esp32
+ARCH = esp32
+BOARD = esp32doit-devkit-v1
+PARAMETER = FlashFreq=80,UploadSpeed=921600
 
 ARG = --board ${PACKAGE}:${ARCH}:${BOARD}:${PARAMETER} --verbose-build --pref build.path=${BUILD_DIR}
 
@@ -16,7 +16,7 @@ ARG = --board ${PACKAGE}:${ARCH}:${BOARD}:${PARAMETER} --verbose-build --pref bu
 SERIAL ?= /dev/ttyUSB0
 
 # Define default OTA  parameters
-IP ?= 192.168.0.106
+IP ?= 192.168.4.1
 PORT ?= 5222
 
 all:
