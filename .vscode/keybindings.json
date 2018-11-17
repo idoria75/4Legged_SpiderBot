@@ -1,0 +1,7 @@
+[
+    {
+        "key": "shift+f5",
+        "command": "workbench.action.tasks.runTask.OTA",
+        "when": "editorTextFocus"
+    }
+]

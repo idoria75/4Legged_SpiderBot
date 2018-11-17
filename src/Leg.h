@@ -33,13 +33,13 @@ class Leg {
   float shoulderLength;
   float femurLength;
   float tibiaLength;
-  uint8_t shoulderAngle;
-  uint8_t femurAngle;
-  uint8_t tibiaAngle;
-  void updateShoulderAngle(uint8_t newShoulderAngle);
-  void updatefemurAngle(uint8_t newFemurAngle);
-  void updateTibiaAngle(uint8_t newTibiaAngle);
-  void updateLegMembers(uint8_t newShoulderAngle,
-                        uint8_t newFemurAngle,
-                        uint8_t newTibiaAngle);
+  uint16_t shoulderAngle;
+  uint16_t femurAngle;
+  uint16_t tibiaAngle;
+  void updateShoulderAngle(uint16_t newShoulderAngle);
+  void updatefemurAngle(uint16_t newFemurAngle);
+  void updateTibiaAngle(uint16_t newTibiaAngle);
+  void updateLegMembers(uint16_t newShoulderAngle,
+                        uint16_t newFemurAngle,
+                        uint16_t newTibiaAngle);
 };

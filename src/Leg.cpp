@@ -21,30 +21,32 @@ void Leg::getMotorNumbers() {
 }
 
 void Leg::setDefaultPosition() {
-  updateLegMembers(10, 20, 30);
+  updateLegMembers(300, 300, 300);
 }
 
 void Leg::setAnotherPosition() {
-  updateLegMembers(20, 80, 40);
+  updateLegMembers(400, 400, 400);
 }
 
-void Leg::updateLegMembers(uint8_t newShoulderAngle,
-                           uint8_t newFemurAngle,
-                           uint8_t newTibiaAngle) {
+void Leg::updateLegMembers(uint16_t newShoulderAngle,
+                           uint16_t newFemurAngle,
+                           uint16_t newTibiaAngle) {
+  Serial.print("New angle: ");
+  Serial.println(newShoulderAngle);
   updateShoulderAngle(newShoulderAngle);
   updatefemurAngle(newFemurAngle);
   updateTibiaAngle(newTibiaAngle);
 }
 
-void Leg::updateShoulderAngle(uint8_t newShoulderAngle) {
+void Leg::updateShoulderAngle(uint16_t newShoulderAngle) {
   shoulderAngle = newShoulderAngle;
 }
 
-void Leg::updatefemurAngle(uint8_t newFemurAngle) {
+void Leg::updatefemurAngle(uint16_t newFemurAngle) {
   femurAngle = newFemurAngle;
 }
 
-void Leg::updateTibiaAngle(uint8_t newTibiaAngle) {
+void Leg::updateTibiaAngle(uint16_t newTibiaAngle) {
   tibiaAngle = newTibiaAngle;
 }
 
