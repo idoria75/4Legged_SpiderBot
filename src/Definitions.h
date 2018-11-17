@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ArduinoJson.h>
+#include <ArduinoOTA.h>
 #include <Thread.h>
 #include <ThreadController.h>
 #include <WebSocketServer.h>
@@ -9,6 +10,7 @@
 
 #include "Fsm.h"
 #include "Robot.h"
+#include "ota.h"
 
 // For JSON Buffer (based on https://arduinojson.org/v5/assistant/)
 #define BUFFER_SIZE_RECV 100

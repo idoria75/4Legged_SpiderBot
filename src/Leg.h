@@ -9,7 +9,12 @@
 
 class Leg {
  public:
-  Leg(float shoulder_len, float femur_len, float tibia_len);
+  Leg(float shoulderLen,
+      float femurLen,
+      float tibiaLen,
+      uint8_t shoulderMotNum,
+      uint8_t femurMotNum,
+      uint8_t tibiaMotNum);
   uint8_t getShoulderAngle();
   uint8_t getFemurAngle();
   uint8_t getTibiaAngle();
@@ -18,19 +23,23 @@ class Leg {
   float getTibiaLength();
   void setDefaultPosition();
   void setAnotherPosition();
+  void getMotorNumbers();
 
  private:
   static Adafruit_PWMServoDriver pwmDriver;
+  uint8_t shoulderMotorNumber;
+  uint8_t femurMotorNumber;
+  uint8_t tibiaMotorNumber;
   float shoulderLength;
   float femurLength;
   float tibiaLength;
-  uint8_t shoulderAngle;
-  uint8_t femurAngle;
-  uint8_t tibiaAngle;
-  void updateShoulderAngle(uint8_t newShoulderAngle);
-  void updatefemurAngle(uint8_t newFemurAngle);
-  void updateTibiaAngle(uint8_t newTibiaAngle);
-  void updateLegMembers(uint8_t newShoulderAngle,
-                        uint8_t newFemurAngle,
-                        uint8_t newTibiaAngle);
+  uint16_t shoulderAngle;
+  uint16_t femurAngle;
+  uint16_t tibiaAngle;
+  void updateShoulderAngle(uint16_t newShoulderAngle);
+  void updatefemurAngle(uint16_t newFemurAngle);
+  void updateTibiaAngle(uint16_t newTibiaAngle);
+  void updateLegMembers(uint16_t newShoulderAngle,
+                        uint16_t newFemurAngle,
+                        uint16_t newTibiaAngle);
 };
