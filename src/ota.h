@@ -3,27 +3,26 @@
 #include <Arduino.h>
 #include <ArduinoOTA.h>
 #include <WiFiUdp.h>
-#include "debug.h"
+// #include "debug.h"
 
-class Ota
-{
-public:
-    void handle();
+class Ota {
+ public:
+  void handle();
 
-    enum States {
-        START,
-        DOWNLOADING,
-        FINISHED,
-        ERROR,
-    };
+  enum States {
+    START,
+    DOWNLOADING,
+    FINISHED,
+    ERROR,
+  };
 
-    static Ota& self();
-    ~Ota();
+  static Ota& self();
+  ~Ota();
 
-private:
-    Ota& operator = (Ota& other) = delete;
-    Ota(const Ota& other) = delete;
-    Ota();
+ private:
+  Ota& operator=(Ota& other) = delete;
+  Ota(const Ota& other) = delete;
+  Ota();
 
-    static uint port;
+  static uint port;
 };

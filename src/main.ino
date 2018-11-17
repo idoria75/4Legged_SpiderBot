@@ -33,7 +33,7 @@ void loop() {
     }
     Serial.println("Serialization: ");
     Serial.println(rob.serializeLegs());
-    Serial.println(rob.serializeDistances());
+    // Serial.println(rob.serializeDistances());
     flag = !flag;
     timeSince = millis();
   }
