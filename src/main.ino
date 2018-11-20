@@ -18,6 +18,7 @@ void setup() {
   rob.getMotorNumbers();
   Ota::self();
   digitalWrite(LED_BUILTIN, LOW);
+  Leg::configurePwmDriver();
 }
 
 bool flag = 0;

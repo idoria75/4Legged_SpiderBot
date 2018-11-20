@@ -24,6 +24,7 @@ class Leg {
   void setDefaultPosition();
   void setAnotherPosition();
   void getMotorNumbers();
+  static void configurePwmDriver();
 
  private:
   static Adafruit_PWMServoDriver pwmDriver;

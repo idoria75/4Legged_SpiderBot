@@ -40,14 +40,17 @@ void Leg::updateLegMembers(uint16_t newShoulderAngle,
 
 void Leg::updateShoulderAngle(uint16_t newShoulderAngle) {
   shoulderAngle = newShoulderAngle;
+  pwmDriver.setPWM(shoulderMotorNumber, 0, shoulderAngle);
 }
 
 void Leg::updatefemurAngle(uint16_t newFemurAngle) {
   femurAngle = newFemurAngle;
+  pwmDriver.setPWM(femurMotorNumber, 0, femurAngle);
 }
 
 void Leg::updateTibiaAngle(uint16_t newTibiaAngle) {
   tibiaAngle = newTibiaAngle;
+  pwmDriver.setPWM(tibiaMotorNumber, 0, tibiaAngle);
 }
 
 uint8_t Leg::getShoulderAngle() {
@@ -72,4 +75,9 @@ float Leg::getFemurLength() {
 
 float Leg::getTibiaLength() {
   return tibiaLength;
+}
+
+void Leg::configurePwmDriver() {
+  pwmDriver.begin();
+  pwmDriver.setPWMFreq(60);
 }
