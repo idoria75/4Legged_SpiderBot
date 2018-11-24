@@ -46,9 +46,6 @@ void receiveDataFromWS() {
         sensorData.add(rob.getOneDistance("Back"));
         sensorData.add(rob.getOneDistance("Left"));
         sensorData.add(rob.getOneDistance("Right"));
-        sensorData.add(1);
-        sensorData.add(2);
-        sensorData.add(3);
         JsonArray& imuData = rootSend.createNestedArray("imu");
         imuData.add(20.575);
         imuData.add(25.678);
