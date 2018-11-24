@@ -76,6 +76,21 @@ String Robot::serializeDistances() {
   return jsonChar;
 }
 
+long Robot::getOneDistance(String sensor) {
+  if (sensor == "Front") {
+    return sFront.getDistance();
+  }
+  if (sensor == "Back") {
+    return sBack.getDistance();
+  }
+  if (sensor == "Left") {
+    return sLeft.getDistance();
+  }
+  if (sensor == "Right") {
+    return sRight.getDistance();
+  }
+}
+
 void Robot::setDefaultPose() {
   legA.setDefaultPosition();
   legB.setDefaultPosition();

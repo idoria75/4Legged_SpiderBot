@@ -12,6 +12,7 @@ void setup() {
 }
 
 void loop() {
+  Serial.println(rob.serializeDistances());
   groupOfThreads.run();
   Ota::self().handle();
   fsm.run_machine();

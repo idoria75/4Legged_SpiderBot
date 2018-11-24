@@ -42,10 +42,13 @@ void receiveDataFromWS() {
         StaticJsonBuffer<BUFFER_SIZE_SEND> jsonBufferSend;
         JsonObject& rootSend = jsonBufferSend.createObject();
         JsonArray& sensorData = rootSend.createNestedArray("sensors");
-        sensorData.add(20);  // sensorData.add(distance1);
-        sensorData.add(22);
-        sensorData.add(23);
-        sensorData.add(24);
+        sensorData.add(rob.getOneDistance("Front"));
+        sensorData.add(rob.getOneDistance("Back"));
+        sensorData.add(rob.getOneDistance("Left"));
+        sensorData.add(rob.getOneDistance("Right"));
+        sensorData.add(1);
+        sensorData.add(2);
+        sensorData.add(3);
         JsonArray& imuData = rootSend.createNestedArray("imu");
         imuData.add(20.575);
         imuData.add(25.678);
@@ -69,7 +72,8 @@ void receiveDataFromWS() {
         char jsonChar[BUFFER_SIZE_SEND];
         rootSend.printTo((char*)jsonChar, rootSend.measureLength() + 1);
         Serial.println(jsonChar);
-        webSocketServer.sendData(jsonChar);
+        // webSocketServer.sendData(jsonChar);
+        webSocketServer.sendData(rob.serializeDistances());
       }
     }
     if (!client.connected()) {

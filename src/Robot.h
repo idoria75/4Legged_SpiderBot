@@ -50,4 +50,5 @@ class Robot {
   void setDefaultPose();
   void setAnotherPose();
   void getMotorNumbers();
+  long getOneDistance(String sensor);
 };
