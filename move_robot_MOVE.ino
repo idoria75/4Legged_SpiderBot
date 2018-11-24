@@ -108,6 +108,11 @@ void sweet_setPWM(int servo_number, int weird_number, int final_servo_value){
   
   }
   vector_values[servo_number] = servo_value;
+
+  /*quick_setPWM(15, 0,TIBIA_DEFAULT_LEG_1 );
+  quick_setPWM(4, 0,TIBIA_DEFAULT_LEG_2 );
+  quick_setPWM(8, 0,TIBIA_DEFAULT_LEG_3 );
+  quick_setPWM(12, 0,TIBIA_DEFAULT_LEG_4 );*/  
 }
 
 void quick_setPWM(int servo_number, int weird_number, int final_servo_value){
@@ -316,6 +321,39 @@ void one_leg_up_test(){
   
 }
 
+void change_base_left(){
+
+  quick_setPWM(COXA_LEG_4 , 0,COXA_DEFAULT_LEG_4);
+  delay(2000);
+  quick_setPWM(COXA_LEG_3 , 0,FORWARD_COXA_1_LEG_3);
+  
+}
+
+void change_base_back(){
+
+  quick_setPWM(COXA_LEG_3 , 0,COXA_DEFAULT_LEG_3);
+  delay(2000);
+  quick_setPWM(COXA_LEG_2 , 0,FORWARD_COXA_1_LEG_2);
+  
+}
+
+void change_base_right(){
+
+  quick_setPWM(COXA_LEG_2 , 0,COXA_DEFAULT_LEG_2);
+  delay(2000);
+  quick_setPWM(COXA_LEG_1 , 0,FORWARD_COXA_1_LEG_1);
+  
+}
+
+void change_base_forward(){
+
+  quick_setPWM(COXA_LEG_1 , 0,COXA_DEFAULT_LEG_1);
+  delay(2000);
+  quick_setPWM(COXA_LEG_4 , 0,FORWARD_COXA_1_LEG_4);
+  
+}
+
+
 
 void setup() {
   //Serial.begin(9600);
@@ -331,6 +369,22 @@ void setup() {
 void loop() {
 
   one_step_forward();
+  one_step_forward();
+  delay(1000);
+  change_base_left();
+  one_step_left();
+  one_step_left();
+  delay(1000);
+  change_base_back();
+  one_step_back();
+  one_step_back();
+  delay(1000);
+  change_base_right();
+  one_step_right();
+  one_step_right();
+  delay(1000);
+  change_base_forward();
+  
   //one_step_back();
   //one_step_right();
   //one_step_left();
