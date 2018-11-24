@@ -1,4 +1,5 @@
 #include "Definitions.h"
+#include "Robot.h"
 
 int new_max = map(MAX_ANGLE, 0, 180, SERVOMIN, SERVOMAX);
 int new_min = map(MIN_ANGLE, 0, 180, SERVOMIN, SERVOMAX);
@@ -105,4 +106,21 @@ void runSetUp() {
   pinMode(LED_BUILTIN, OUTPUT);
   wifiConfiguration();
   threadConfiguration();
+}
+
+void setDefaultStance() {
+  rob.setDefaultPose();
+  Serial.println(rob.serializeLegs());
+}
+
+void setAnotherStance() {
+  rob.setAnotherPose();
+  Serial.println(rob.serializeLegs());
+}
+
+void configureStates() {
+  fsm.add_timed_transition(&stateAnotherStance, &stateDefaultStance, 1000,
+                           NULL);
+  fsm.add_timed_transition(&stateDefaultStance, &stateAnotherStance, 1000,
+                           NULL);
 }
