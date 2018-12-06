@@ -38,6 +38,8 @@ class Robot {
   USensor sLeft;
   USensor sRight;
   int aux;
+  String currentState;
+  String previousState;
   // void setDefaultPose();
   // void setAnotherPose();
 
@@ -46,6 +48,7 @@ class Robot {
   String getDistances();
   String serializeLegs();
   String serializeDistances();
+  void calculateDistances();
   void stepForward();
   void setDefaultPose();
   void setAnotherPose();

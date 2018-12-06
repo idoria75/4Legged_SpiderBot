@@ -11,13 +11,16 @@ String USensor::getSetup() {
   return "Echo: " + String(echoPin) + ", Trigger: " + String(triggerPin);
 }
 
-long USensor::getDistance() {
+void USensor::calculateDistance() {
   digitalWrite(triggerPin, LOW);
   delayMicroseconds(2);
   digitalWrite(triggerPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(triggerPin, LOW);
-  duration = pulseIn(echoPin, HIGH);
+  duration = pulseIn(echoPin, HIGH, 10000);
   distance = (duration / 2) / 29.1;
+}
+
+long USensor::getDistance() {
   return distance;
 }

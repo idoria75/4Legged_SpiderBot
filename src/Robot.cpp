@@ -91,17 +91,24 @@ long Robot::getOneDistance(String sensor) {
   }
 }
 
+void Robot::calculateDistances() {
+  sFront.calculateDistance();
+  sBack.calculateDistance();
+  sLeft.calculateDistance();
+  sRight.calculateDistance();
+}
+
 void Robot::setDefaultPose() {
   legA.setDefaultPosition();
-  legB.setDefaultPosition();
-  legC.setDefaultPosition();
-  legD.setDefaultPosition();
+  // legB.setDefaultPosition();
+  // legC.setDefaultPosition();
+  // legD.setDefaultPosition();
 }
 void Robot::setAnotherPose() {
   legA.setAnotherPosition();
-  legB.setAnotherPosition();
-  legC.setAnotherPosition();
-  legD.setAnotherPosition();
+  // legB.setAnotherPosition();
+  // legC.setAnotherPosition();
+  // legD.setAnotherPosition();
 }
 
 void Robot::getMotorNumbers() {

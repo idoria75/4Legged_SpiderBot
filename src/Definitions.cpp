@@ -8,6 +8,7 @@ int count_msgs_received = 0;
 // Receive data from WebSocket (WS)
 WiFiClient client;
 String data;
+
 void receiveDataFromWS() {
   if (!flagIsConnectedToClient) {
     client = server.available();
@@ -20,6 +21,41 @@ void receiveDataFromWS() {
   }
   if (flagIsConnectedToClient) {
     if (client.connected()) {
+      // Send data to client
+      StaticJsonBuffer<BUFFER_SIZE_SEND> jsonBufferSend;
+      JsonObject& rootSend = jsonBufferSend.createObject();
+      JsonArray& sensorData = rootSend.createNestedArray("sensors");
+      sensorData.add(rob.getOneDistance("Front"));
+      sensorData.add(rob.getOneDistance("Back"));
+      sensorData.add(rob.getOneDistance("Left"));
+      sensorData.add(rob.getOneDistance("Right"));
+      JsonArray& imuData = rootSend.createNestedArray("imu");
+      imuData.add(20.575);
+      imuData.add(25.678);
+      imuData.add(30.123);
+      JsonArray& legAData = rootSend.createNestedArray("legA");
+      legAData.add(20);
+      legAData.add(25);
+      legAData.add(30);
+      JsonArray& legBData = rootSend.createNestedArray("legB");
+      legBData.add(20);
+      legBData.add(25);
+      legBData.add(30);
+      JsonArray& legCData = rootSend.createNestedArray("legC");
+      legCData.add(20);
+      legCData.add(25);
+      legCData.add(30);
+      JsonArray& legDData = rootSend.createNestedArray("legD");
+      legDData.add(20);
+      legDData.add(25);
+      legDData.add(30);
+      char jsonChar[BUFFER_SIZE_SEND];
+      rootSend.printTo((char*)jsonChar, rootSend.measureLength() + 1);
+      Serial.println(jsonChar);
+      webSocketServer.sendData(jsonChar);
+      // webSocketServer.sendData(rob.serializeDistances());
+
+      // Receive data from Client
       data = webSocketServer.getData();
       Serial.print("Data: ");
       Serial.println(data);
@@ -39,38 +75,6 @@ void receiveDataFromWS() {
         Serial.print("Ref: ");
         const char* ref = rootRecv["gaitDirection"];
         Serial.println(ref);
-        StaticJsonBuffer<BUFFER_SIZE_SEND> jsonBufferSend;
-        JsonObject& rootSend = jsonBufferSend.createObject();
-        JsonArray& sensorData = rootSend.createNestedArray("sensors");
-        sensorData.add(rob.getOneDistance("Front"));
-        sensorData.add(rob.getOneDistance("Back"));
-        sensorData.add(rob.getOneDistance("Left"));
-        sensorData.add(rob.getOneDistance("Right"));
-        JsonArray& imuData = rootSend.createNestedArray("imu");
-        imuData.add(20.575);
-        imuData.add(25.678);
-        imuData.add(30.123);
-        JsonArray& legAData = rootSend.createNestedArray("legA");
-        legAData.add(20);
-        legAData.add(25);
-        legAData.add(30);
-        JsonArray& legBData = rootSend.createNestedArray("legB");
-        legBData.add(20);
-        legBData.add(25);
-        legBData.add(30);
-        JsonArray& legCData = rootSend.createNestedArray("legC");
-        legCData.add(20);
-        legCData.add(25);
-        legCData.add(30);
-        JsonArray& legDData = rootSend.createNestedArray("legD");
-        legDData.add(20);
-        legDData.add(25);
-        legDData.add(30);
-        char jsonChar[BUFFER_SIZE_SEND];
-        rootSend.printTo((char*)jsonChar, rootSend.measureLength() + 1);
-        Serial.println(jsonChar);
-        // webSocketServer.sendData(jsonChar);
-        webSocketServer.sendData(rob.serializeDistances());
       }
     }
     if (!client.connected()) {
@@ -94,8 +98,11 @@ void wifiConfiguration() {
 }
 
 void threadConfiguration() {
-  threadWebsocket.onRun([]() { receiveDataFromWS(); });
-  threadWebsocket.setInterval(1000);
+  threadWebsocket.onRun([]() {
+    Serial.println("Receive Data From WS()");
+    receiveDataFromWS();
+  });
+  threadWebsocket.setInterval(200);
   // threadFSM.onRun([]() { runStateMachine(); });
   // threadFSM.setInterval(500);
   groupOfThreads.add(&threadWebsocket);
@@ -104,7 +111,7 @@ void threadConfiguration() {
 
 void runSetUp() {
   Serial.begin(115200);
-  pinMode(LED_BUILTIN, OUTPUT);
+  // pinMode(LED_BUILTIN, OUTPUT);
   wifiConfiguration();
   threadConfiguration();
 }

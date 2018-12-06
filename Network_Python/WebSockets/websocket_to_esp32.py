@@ -31,14 +31,16 @@ while i < nrOfMessages:
     #ws.send("Message Number: " + str(i))
     # Gets reply from server
     result = ws.recv()
-    print(result)
+    # print(result)
     if(result != "Error!"):
-	result_parsed = json.loads(result)
+        result_parsed = json.loads(result)
         print("Received: ")
         print(result)
         print("Parsed: ")
         print(result_parsed)
         i = i+1
-    time.sleep(time_between_messages)
+    else:
+        print("Error!")
+    # time.sleep(time_between_messages)
 
 ws.close()

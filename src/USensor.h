@@ -5,6 +5,7 @@ class USensor {
  public:
   USensor(uint8_t echo, uint8_t trigger);
   long getDistance();
+  void calculateDistance();
   String getSetup();
 
  private:
