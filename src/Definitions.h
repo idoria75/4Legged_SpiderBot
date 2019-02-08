@@ -46,6 +46,16 @@ Adafruit_PWMServoDriver Leg::pwmDriver = Adafruit_PWMServoDriver();
 unsigned long timeSince = 0;
 bool flag = 0;
 
+int new_max = map(MAX_ANGLE, 0, 180, SERVOMIN, SERVOMAX);
+int new_min = map(MIN_ANGLE, 0, 180, SERVOMIN, SERVOMAX);
+int count_msgs_received = 0;
+
+// Receive data from WebSocket (WS)
+WiFiClient client;
+String data;
+
+uint8_t POWERON_I2C = 4;
+
 void setDefaultStance();
 void setAnotherStance();
 

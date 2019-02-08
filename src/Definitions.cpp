@@ -1,14 +1,6 @@
 #include "Definitions.h"
 #include "Robot.h"
 
-int new_max = map(MAX_ANGLE, 0, 180, SERVOMIN, SERVOMAX);
-int new_min = map(MIN_ANGLE, 0, 180, SERVOMIN, SERVOMAX);
-int count_msgs_received = 0;
-
-// Receive data from WebSocket (WS)
-WiFiClient client;
-String data;
-
 void receiveDataFromWS() {
   if (!flagIsConnectedToClient) {
     client = server.available();
@@ -51,14 +43,14 @@ void receiveDataFromWS() {
       legDData.add(30);
       char jsonChar[BUFFER_SIZE_SEND];
       rootSend.printTo((char*)jsonChar, rootSend.measureLength() + 1);
-      Serial.println(jsonChar);
+      // Serial.println(jsonChar);
       webSocketServer.sendData(jsonChar);
       // webSocketServer.sendData(rob.serializeDistances());
 
       // Receive data from Client
       data = webSocketServer.getData();
-      Serial.print("Data: ");
-      Serial.println(data);
+      // Serial.print("Data: ");
+      // Serial.println(data);
       if (data.length() > 0) {
         char data_buf[BUFFER_SIZE_RECV];
         data.toCharArray(data_buf, BUFFER_SIZE_RECV);
@@ -95,11 +87,12 @@ void wifiConfiguration() {
   Serial.print("AP IP address: ");
   Serial.println(IP);
   server.begin();
+  Serial.println("WiFi setup complete!");
 }
 
 void threadConfiguration() {
   threadWebsocket.onRun([]() {
-    Serial.println("Receive Data From WS()");
+    // Serial.println("Receive Data From WS()");
     receiveDataFromWS();
   });
   threadWebsocket.setInterval(200);
@@ -107,12 +100,18 @@ void threadConfiguration() {
   // threadFSM.setInterval(500);
   groupOfThreads.add(&threadWebsocket);
   // groupOfThreads.add(&threadFSM);
+  Serial.println("Thread setup complete!");
 }
 
 void runSetUp() {
   Serial.begin(115200);
+  pinMode(POWERON_I2C, OUTPUT);
+  digitalWrite(POWERON_I2C, LOW);
+  Serial.println("Turn on I2C!");
+  delay(1000);
   // pinMode(LED_BUILTIN, OUTPUT);
   wifiConfiguration();
+  delay(1000);
   threadConfiguration();
 }
 
@@ -127,8 +126,8 @@ void setAnotherStance() {
 }
 
 void configureStates() {
-  fsm.add_timed_transition(&stateAnotherStance, &stateDefaultStance, 1000,
+  fsm.add_timed_transition(&stateAnotherStance, &stateDefaultStance, 3000,
                            NULL);
-  fsm.add_timed_transition(&stateDefaultStance, &stateAnotherStance, 1000,
+  fsm.add_timed_transition(&stateDefaultStance, &stateAnotherStance, 3000,
                            NULL);
 }
