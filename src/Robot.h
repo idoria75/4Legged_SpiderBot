@@ -40,8 +40,6 @@ class Robot {
   int aux;
   String currentState;
   String previousState;
-  // void setDefaultPose();
-  // void setAnotherPose();
 
  public:
   Robot(float shoulderLength, float femurLength, float tibiaLength);

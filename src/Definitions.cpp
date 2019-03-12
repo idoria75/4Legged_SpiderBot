@@ -109,7 +109,6 @@ void runSetUp() {
   digitalWrite(POWERON_I2C, LOW);
   Serial.println("Turn on I2C!");
   delay(1000);
-  // pinMode(LED_BUILTIN, OUTPUT);
   wifiConfiguration();
   delay(1000);
   threadConfiguration();

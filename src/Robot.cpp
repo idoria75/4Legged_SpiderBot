@@ -31,7 +31,6 @@ Robot::Robot(float shoulderLength, float femurLength, float tibiaLength)
       sRight(SENSOR_RIGHT_ECHO, SENSOR_RIGHT_TRIGGER){};
 
 String Robot::serializeLegs() {
-  // Serial.println("Serialize Legs!");
   StaticJsonBuffer<BUFFER_SIZE> jsonBuffer;
   JsonObject& root = jsonBuffer.createObject();
   JsonArray& legAData = root.createNestedArray("leg A");
@@ -100,15 +99,15 @@ void Robot::calculateDistances() {
 
 void Robot::setDefaultPose() {
   legA.setDefaultPosition();
-  // legB.setDefaultPosition();
-  // legC.setDefaultPosition();
-  // legD.setDefaultPosition();
+  legB.setDefaultPosition();
+  legC.setDefaultPosition();
+  legD.setDefaultPosition();
 }
 void Robot::setAnotherPose() {
   legA.setAnotherPosition();
-  // legB.setAnotherPosition();
-  // legC.setAnotherPosition();
-  // legD.setAnotherPosition();
+  legB.setAnotherPosition();
+  legC.setAnotherPosition();
+  legD.setAnotherPosition();
 }
 
 void Robot::getMotorNumbers() {
