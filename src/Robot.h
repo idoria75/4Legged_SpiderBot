@@ -4,7 +4,7 @@
 #include "Leg.h"
 #include "USensor.h"
 
-#define SENSOR_FRONT_ECHO 35
+#define SENSOR_FRONT_ECHO 34
 #define SENSOR_FRONT_TRIGGER 23
 #define SENSOR_BACK_ECHO 26
 #define SENSOR_BACK_TRIGGER 25
